@@ -1,0 +1,47 @@
+.jsdj {
+	max-width: 1280px;
+	max-height:600px;
+	background:#f4f4f4;
+}
+
+.riga2{
+ 	height:220px !important;
+	padding: 0 !important;
+}
+
+.echo{
+ 	height:120px;
+	
+}
+
+.eq{
+ 	height:140px;
+}
+
+.pista{
+ 	height:300px;
+}
+
+.spettro-dett-min-automix{
+ 	height:80px;
+}
+
+.dett_min{
+ 	height:100px;
+}
+
+.bpm{
+	height: 40px
+}
+
+.img-rounded{
+	border-radius: 6px;
+}
+
+[class*="col-"] {
+  	background-color: #eee;
+  	background-color: rgba(86,61,124,.15);
+  	border: 1px solid #ddd;
+ 	border: 1px solid rgba(86,61,124,.2);
+	padding: 0 !important;
+}
