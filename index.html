@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="it">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>JSDJ</title>
+
+    <!-- CSS -->
+     	<link href="assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+     	<link href="assets/plugins/bootstrap-slider/css/bootstrap-slider.min.css" rel="stylesheet">
+     	<link href="assets/css/jsdj.css" rel="stylesheet">
+     	<link href="assets/css/riga2.css" rel="stylesheet" type="text/css"></link>
+		<link href="assets/plugins/jQueryFileTree/css/jQueryFileTree.min.css" rel="stylesheet" type="text/css" media="screen" />
+		<link href="assets/plugins/jquery-ui-1.12.1.custom/jquery-ui.min.css" rel="stylesheet" type="text/css"></link>
+    <!-- LIBRERIE JS -->
+    	<script src="assets/plugins/jquery.min.js"></script>
+     	<script src="assets/plugins/bootstrap-slider/js/bootstrap-slider.min.js"></script>
+		<script src="assets/plugins/jQueryFileTree/jQueryFileTree.js" type="text/javascript"></script>
+		<script src="assets/plugins/id3-master/id3.js"></script>
+		<script src="assets/plugins/jquery-ui-1.12.1.custom/jquery-ui.min.js"></script>
+		
+		<script type="text/javascript">
+		
+			function setTagsScheda(name,tags){
+				var scheda_id = "#scheda_" + name;				
+				if(tags != null)
+        			$(scheda_id).text(tags);
+        		else
+        			$(scheda_id).text("");
+			}
+			
+			$(document).ready( function() {
+				var windowFile;
+											
+				function initFilesTree(path) {
+					window.windowFile = $('#mp3Tree')
+	        		.fileTree(
+			        	{
+			        		root:path,
+			            	script: 'assets/plugins/jQueryFileTree/connectors/jqueryFileTree.php',
+			            	expandSpeed: 1000,
+			            	collapseSpeed: 1000,
+			            	onlyFolder: false,
+			            	onlyFile: true,
+			            	multiFolder: false
+			        	}
+			        )
+			        .on('initree', function(e, data) {
+						//alert('inizializzazione file tree avvenuta');
+						$(".file a").each(function( index ) {
+							if(index == 0){
+								$(this).click();
+								return;
+							}
+						});
+					})
+			        .on('filetreeclicked', function(e, data) {	
+			        	$("#scheda").show();
+			        	var dir = data.rel.replace('./jsdj/','./');
+			        	id3({ file: dir, type: id3.ajax }, function(err, tags) {
+			  				var titolo = tags.title;
+			  				setTagsScheda('titolo',titolo);
+			        		var autore = tags.artist;
+			        		setTagsScheda('autore', autore);
+			        		var album = tags.album;
+			        		setTagsScheda('album', album);
+			        		var anno = tags.year;
+			        		setTagsScheda('anno', anno);
+			        		var track = tags.v2.track;
+			        		setTagsScheda('track', track);
+			        		var genere = tags.v2.genre;
+			        		setTagsScheda('genere', genere);
+				        	var src = 'cover/' + autore + '_' + album + '.png';
+				        	var image = document.getElementById('copertina');
+				        	image.src = src;
+			        		
+			        		$( "li" ).each(function( index ) {
+				        		$(this).draggable({
+				        		    revert: "invalid", 
+				        			helper: 'clone',
+				        			scroll: false,
+				        			cursor: 'move',
+				        			zIndex: 1,
+				        			start: function(event,ui){
+					        				
+					        		}
+				        		});
+				        		$('#playlist').droppable({
+			        		      	classes: {
+			        		          "ui-droppable-active": "ui-state-highlight"
+			        		        },
+				        			drop: function(event,ui) {
+				        				console.log(this);
+										$(this).addClass('ui-state-highlight');
+										var table = document.getElementById('tablePlayList');
+										var tbody = table.getElementsByTagName('tbody')[0];
+										var tr = document.createElement('tr');
+										var tags = [titolo,autore,album,anno,genere];									
+										for(var i=0; i<5; i++){
+											var td = document.createElement('td');
+											var node = document.createTextNode(tags[i]);
+											td.appendChild(node);
+											tr.appendChild(td);
+										}
+										tbody.appendChild(tr);									
+						           	}
+				        		});
+							});	
+			        	})
+			        });
+				};
+				
+				$('#fileSystem')
+		        .fileTree(
+		        	{
+		            	root: './jsdj/demo/',
+		            	script: 'assets/plugins/jQueryFileTree/connectors/jqueryFileTree.php',
+		            	expandSpeed: 1000,
+		            	collapseSpeed: 1000,
+		            	onlyFolders: true,
+		            	multiFolder: false,
+		        	}
+		        )
+		        .on('filetreeclicked', function(e, data) {
+		        	$("#scheda").hide();
+		        	window.windowFile = null;
+		        	$('#file_mp3').html('<div id="mp3Tree"></div>');
+		        	initFilesTree(data.rel);
+				});			
+		    });
+		</script>
+		
+  </head>
+
+  <body>
+    <!-- Container dell'app JSDJ -->
+    <div class="jsdj">
+
+      <!-- Macro Area Superiore -->
+      <div class="row" id="m1">
+         <div class="col-md-2 col-sm-2 col-xs-2">
+         	<!-- Riga del blocco equalizzazione -->
+         	<div class = "row" id="eq_tr_1">
+         		<div class="col-md-12 col-sm-12 col-xs-12 eq">
+	         		<h6 align="center">Equalizzatore</h6>
+	        	</div>
+	        </div>
+	      <!-- Riga del blocco della scelta dell'eq -->	
+	      <div class = "row" id="custom_eq_tr1">
+         		<div class="col-md-12 col-sm-12 col-xs-12 echo">
+         			<h6>ECHO RadioEq</h6>
+         		</div>
+          </div>
+ 	  	  <!-- Riga del blocco echo -->
+	 	  <div class = "row" id="piastra_traccia2">
+         		<div class="col-md-12 col-sm-12 col-xs-12 echo">
+         			<h6>ECHO traccia 1</h6>
+         		</div>
+          </div>
+         </div>
+        
+        <div class="col-md-3 col-sm-3 col-xs-3"> 
+         	<div class = "row" id="spettro_traccia1">
+         		<div class="col-md-12 col-sm-12 col-xs-12 spettro-dett-min-automix">
+         			<h6>SPETTRO traccia 1</h6>
+         		</div>
+         	</div>
+         	<div class = "row" id="pista_traccia1">
+         		<div class="col-md-12 col-sm-12 col-xs-12 pista">
+         			<h6>PIASTA traccia 1</h6>
+         		</div>
+         	</div>
+        </div>
+        
+        <div class="col-md-2 col-sm-2 col-xs-2"> 
+         	<div class = "row" id="dettaglio_tracce">
+         		<div class="col-md-6 col-sm-6 col-xs-6 spettro-dett-min-automix">
+         			<h6>Dettaglio tracce1</h6>
+         		</div>
+         		<div class="col-md-6 col-sm-6 col-xs-6 spettro-dett-min-automix">
+         			<h6>Dettaglio tracce2</h6>
+         		</div>
+         	</div>
+         	<div class = "row" id="dettaglio_minutaggi">
+         		<div class="col-md-6 col-sm-6 col-xs-6 dett_min">
+         			<h6>Rimane1</h6>
+         			<h6>00:00:00</h6>
+         			<h6>Totlale1</h6>
+         			<h6>00:00:00</h6>
+         		</div>
+         		<div class="col-md-6 col-sm-6 col-xs-6 dett_min">
+         			<h6>Rimane2</h6>
+         			<h6>00:00:00</h6>
+         			<h6>Totlale2</h6>
+         			<h6>00:00:00</h6>
+         		</div>
+         	</div>
+         	<div class = "row" id="dettaglio_minutaggi_attuali">
+         		<div class="col-md-6 col-sm-6 col-xs-6 spettro-dett-min-automix">
+         			<h6>00:00:00</h6>
+         		</div>
+         		<div class="col-md-6 col-sm-6 col-xs-6 spettro-dett-min-automix">
+         			<h6>00:00:00</h6>
+         		</div>
+         	<div class = "row" id="dettaglio_bpm">
+         		<div class="col-md-6 col-sm-6 col-xs-6 bpm">
+         			<h6>120 bpm</h6>
+         		</div>
+         		<div class="col-md-6 col-sm-6 col-xs-6 bpm">
+         			<h6>120 bpm</h6>
+         		</div>
+         	</div>
+         	</div>         	        	
+         	<div class = "row" id="automix">
+         		<div class="col-md-12 col-sm-12 col-xs-12 spettro-dett-min-automix">
+         			<div class="range-slider vertical-range">
+         				<span class="range-slider-handle" role="slider" tabindex="0"></span>
+  						<span class="range-slider-active-segment"></span>
+         				<input type="range"  min="0" max="100"/>
+         			</div>
+				</div>
+         	</div>
+        </div>
+        
+        <div class="col-md-3 col-sm-3 col-xs-3">
+         	<div class = "row" id="spettro_traccia2">
+         		<div class="col-md-12 col-sm-12 col-xs-12 spettro-dett-min-automix">
+         			<h6>SPETTRO traccia 2</h6>
+         		</div>
+         	</div>
+         	<div class = "row" id="pista_traccia2">
+         		<div class="col-md-12 col-sm-12 col-xs-12 pista">
+         			<h6>PISTA traccia 2</h6>
+         		</div>
+         	</div>
+        </div>
+        
+        <div class="col-md-2 col-sm-2 col-xs-2">
+         	<!-- Riga del blocco equalizzazione -->
+         	<div class = "row" id="spettro_traccia2">
+         		<div class="col-md-12 col-sm-12 col-xs-12 eq">
+         			<h6 align="center">Equalizzatore</h6>
+         		</div>
+         	</div>
+         	<!-- Riga del blocco della scelta dell'eq -->	
+	      	<div class = "row" id="custom_eq_tr1">
+         		<div class="col-md-12 col-sm-12 col-xs-12 echo">
+         			<h6>ECHO RadioEq</h6>
+         		</div>
+          	</div>
+         	<!-- Riga del blocco echo -->
+         	<div class = "row" id="piastra_traccia2">
+         		<div class="col-md-12 col-sm-12 col-xs-12 echo">
+         			<h6>ECHO traccia 2</h6>
+         		</div>
+         	</div>
+        </div>
+      </div>
+      
+      <!-- Macro Area Inferiore -->
+      <div class="row" id="m2">
+         <div class="col-md-2 col-sm-2 col-xs-2 riga2" id="FileSystem">
+         	<div id="fileSystem" class="file_system"></div>         	
+         </div>
+         <div class="col-md-3 col-sm-3 col-xs-3 riga2" id="list_music_file">
+			<div id="file_mp3" class="file_mp3"></div>
+         </div>
+         <div class="col-md-5 col-sm-5 col-xs-5 riga2" id="playlist_zone">
+       		<div class="play_list" id="playlist">
+				<table class="tab_playlist" id="tablePlayList">
+					<thead><tr><th>Titolo</th><th>Artista</th><th>Album</th><th>Anno</th><th>Genere</th></tr></thead>
+					<tbody></tbody>							
+				</table>
+			</div>	
+         </div>
+         <div class="col-md-2 col-sm-2 col-xs-2 riga2" id="mp3_scheda">
+        		<div class="col-md-12 col-sm-12 col-xs-12 riga2">
+					<div id="TabMp3" class="scheda_mp3">
+						<div class="scheda" id="scheda">
+							<table class="tab_scheda" id="tabScheda">
+								<tr>
+									<td>
+										<img src="assets/images/not_file.png" id="copertina" width="50" height="50"></img>
+									</td>
+									<td>
+										<h2 id="scheda_titolo"></h2>
+										<h2 id="scheda_autore"></h2>
+									</td>
+								</tr>
+								<tr>
+									<td><h2>Album:</h2></td>
+									<td><h2 id="scheda_album"></h2></td>
+								</tr>
+								<tr>
+									<td><h2>Anno:</h2></td>
+									<td><h2 id="scheda_anno"></h2></td>
+								</tr>
+								<tr>
+									<td><h2>Track:</h2></td>
+									<td><h2 id="scheda_track"></h2></td>
+								</tr>
+								<tr>
+									<td><h2>Genere:</h2></td>
+									<td><h2 id="scheda_genere"></h2></td>
+								</tr>
+							</table>
+						</div>				
+					</div>
+        		</div>
+         	</div>
+         </div>
+      </div>
+    </div>
+  </body>
+</html>
