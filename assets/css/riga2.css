@@ -32,8 +32,8 @@ h2 {
 	border-left: solid 1px #BBB;
 	border-bottom: solid 1px #FFF;
 	border-right: solid 1px #FFF;
-	background: #FFF;
-	overflow: scroll;
+	background: #000;
+	overflow-y: auto;
 	padding: 5px;
 }
 
@@ -60,19 +60,41 @@ h2 {
 	border-bottom: solid 1px #FFF;
 	border-right: solid 1px #FFF;
 	background: #FFF;
-	overflow: scroll;
 	padding: 5px;
 }
 
-table  { 
+table{
 	width:100%;
-  	border-collapse:collapse
 }
-td, th { 
-	width:50px;
-	height: 50px;
+
+#tabPlayList th {
 	text-align: center; 
    	border:1px solid #ddd;
    	padding:1px;
 	font-size: 10px;
+	background: #000;
+	
+}
+
+#tabPlayList td { 
+	text-align: center; 
+   	border:1px solid #ddd;
+   	padding:1px;
+	font-size: 10px;
+}
+
+#tabPlayList tr:hover { 
+	text-align: center; 
+	font-size: 10px;	
+	background-color: #414141;
+}
+
+#copertina{
+	width: 70px;  
+	height: 70px;
+	border: 1px solid #fff
+}
+
+a{
+	color: white !important;	
 }

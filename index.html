@@ -75,7 +75,7 @@
 			        		setTagsScheda('track', track);
 			        		var genere = tags.v2.genre;
 			        		setTagsScheda('genere', genere);
-				        	var src = 'cover/' + autore + '_' + album + '.png';
+				        	var src = 'covers/' + autore + '_' + album + '.png';
 				        	var image = document.getElementById('copertina');
 				        	image.src = src;
 			        		
@@ -97,7 +97,7 @@
 				        			drop: function(event,ui) {
 				        				console.log(this);
 										$(this).addClass('ui-state-highlight');
-										var table = document.getElementById('tablePlayList');
+										var table = document.getElementById('tabPlayList');
 										var tbody = table.getElementsByTagName('tbody')[0];
 										var tr = document.createElement('tr');
 										var tags = [titolo,autore,album,anno,genere];									
@@ -267,28 +267,28 @@
          <div class="col-md-2 col-sm-2 col-xs-2 riga2" id="FileSystem">
          	<div id="fileSystem" class="file_system"></div>         	
          </div>
-         <div class="col-md-3 col-sm-3 col-xs-3 riga2" id="list_music_file">
+         <div class="col-md-2 col-sm-2 col-xs-2 riga2" id="list_music_file">
 			<div id="file_mp3" class="file_mp3"></div>
          </div>
          <div class="col-md-5 col-sm-5 col-xs-5 riga2" id="playlist_zone">
        		<div class="play_list" id="playlist">
-				<table class="tab_playlist" id="tablePlayList">
+				<table class="tab_playlist" id="tabPlayList">
 					<thead><tr><th>Titolo</th><th>Artista</th><th>Album</th><th>Anno</th><th>Genere</th></tr></thead>
 					<tbody></tbody>							
 				</table>
 			</div>	
          </div>
-         <div class="col-md-2 col-sm-2 col-xs-2 riga2" id="mp3_scheda">
+         <div class="col-md-3 col-sm-3 col-xs-3 riga2" id="mp3_scheda">
         		<div class="col-md-12 col-sm-12 col-xs-12 riga2">
 					<div id="TabMp3" class="scheda_mp3">
 						<div class="scheda" id="scheda">
 							<table class="tab_scheda" id="tabScheda">
 								<tr>
-									<td>
-										<img src="assets/images/not_file.png" id="copertina" width="50" height="50"></img>
+									<td width="20%">
+										<img src="assets/images/no_cover.png" id="copertina"></img>
 									</td>
-									<td>
-										<h2 id="scheda_titolo"></h2>
+									<td width="80%">
+										<h1 id="scheda_titolo"></h1>
 										<h2 id="scheda_autore"></h2>
 									</td>
 								</tr>
