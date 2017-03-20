@@ -1,7 +1,13 @@
 .jsdj {
 	max-width: 1280px;
-	max-height:600px;
-	background:#f4f4f4;
+	max-height: 600px;
+	background: #f4f4f4;
+	position: absolute;
+	top: 30px;
+	bottom: 30px;
+	left: 30px;
+	right: 30px;
+	color: white;
 }
 
 .riga2{
@@ -19,12 +25,21 @@
  	height:140px;
 }
 
+.custom_eq{
+	height:120px;
+	overflow-y: auto;
+}
+
 .pista{
  	height:300px;
 }
 
 .spettro-dett-min-automix{
  	height:80px;
+}
+
+#slider_automix{
+	top: 40%;
 }
 
 .dett_min{
@@ -39,9 +54,13 @@
 	border-radius: 6px;
 }
 
+.row{
+	margin-right: 0px;
+	margin-left: 0px;
+}
+
 [class*="col-"] {
-  	background-color: #eee;
-  	background-color: rgba(86,61,124,.15);
+  	background-color: #000;
   	border: 1px solid #ddd;
  	border: 1px solid rgba(86,61,124,.2);
 	padding: 0 !important;

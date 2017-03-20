@@ -25,6 +25,10 @@
 		<script src="assets/plugins/jquery-ui-1.12.1.custom/jquery-ui.min.js"></script>
 		
 		<script type="text/javascript">
+						 
+			var audioElm1;
+			var audioElm2;
+			var audioURL;
 		
 			function setTagsScheda(name,tags){
 				var scheda_id = "#scheda_" + name;				
@@ -35,8 +39,32 @@
 			}
 			
 			$(document).ready( function() {
-				var windowFile;
-											
+				
+				$( function() {
+				    $( "#progressbar" ).progressbar({
+				      value: 37
+				    });
+				} );
+			  	
+			
+			  	$( function() {
+			    	$( "#slider_automix" ).slider();
+			  	} );
+			  
+			  	$( function() {
+			  		$( ".slider-vertical" ).slider({
+				      orientation: "vertical",
+				      range: "min",
+				      min: 0,
+				      max: 100,
+				      value: 50,
+				      slide: function( event, ui ) {
+				        
+				      }
+				    });
+				} );
+			  	
+				var windowFile;					
 				function initFilesTree(path) {
 					window.windowFile = $('#mp3Tree')
 	        		.fileTree(
@@ -87,7 +115,16 @@
 				        			cursor: 'move',
 				        			zIndex: 1,
 				        			start: function(event,ui){
-					        				
+				        				audioURL = event.target.firstChild.rel;
+				        				var new_dir = event.target.firstChild.rel.replace('./jsdj/','./');
+				        				id3({ file: new_dir, type: id3.ajax }, function(err, tags) {
+				        					titolo = tags.title;
+							        		autore = tags.artist;
+							        		album = tags.album;
+							        		anno = tags.year;
+							        		track = tags.v2.track;
+							        		genere = tags.v2.genre;				
+				        				});
 					        		}
 				        		});
 				        		$('#playlist').droppable({
@@ -95,7 +132,6 @@
 			        		          "ui-droppable-active": "ui-state-highlight"
 			        		        },
 				        			drop: function(event,ui) {
-				        				console.log(this);
 										$(this).addClass('ui-state-highlight');
 										var table = document.getElementById('tabPlayList');
 										var tbody = table.getElementsByTagName('tbody')[0];
@@ -110,6 +146,31 @@
 										tbody.appendChild(tr);									
 						           	}
 				        		});
+				        		$('#piastra1').droppable({
+				        			classes: {
+				        		      	"ui-droppable-active": "ui-state-highlight"
+				        		    },
+				        		    drop: function(event,ui) {
+				        		    	audioElm1 = document.getElementById("audio1");
+				        		    	curruent_audioURL = audioURL;
+				        		    	audioElm1.src = curruent_audioURL.replace('./jsdj/','./');
+				        		    	console.log(audioElm1.duration);
+				        		    	$('#titolo_dettaglio1').text(titolo);
+				        		    	$('#autore_dettaglio1').text(autore);
+				                     }
+				        		})
+				        		$('#piastra2').droppable({
+				        			classes: {
+				        		      "ui-droppable-active": "ui-state-highlight"
+				        		    },
+				        		    drop: function(event,ui) {
+				        		    	audioElm2 = document.getElementById("audio2");
+				        		    	curruent_audioURL = audioURL;
+				        		    	audioElm2.src = curruent_audioURL.replace('./jsdj/','./');
+				        		    	$('#titolo_dettaglio2').text(titolo);
+				        		    	$('#autore_dettaglio2').text(autore);
+				        		    }
+				        		})
 							});	
 			        	})
 			        });
@@ -133,6 +194,29 @@
 		        	initFilesTree(data.rel);
 				});			
 		    });
+			
+			function play_track_1(){
+				audioElm1.play();
+			}
+			function pause_track_1(){
+				audioElm1.pause();
+			}
+			function stop_track_1(){
+				audioElm1.pause();
+				audioElm1.currentTime=0;
+			}
+			
+			function play_track_2(){
+				audioElm2.play();
+			}
+			function pause_track_2(){
+				audioElm2.pause();
+			}
+			function stop_track_2(){
+				audioElm2.pause();
+				audioElm2.currentTime=0;
+			}
+			
 		</script>
 		
   </head>
@@ -145,21 +229,89 @@
       <div class="row" id="m1">
          <div class="col-md-2 col-sm-2 col-xs-2">
          	<!-- Riga del blocco equalizzazione -->
-         	<div class = "row" id="eq_tr_1">
+         	<div class = "row" id="eq_tr_1" align="center"> 
          		<div class="col-md-12 col-sm-12 col-xs-12 eq">
-	         		<h6 align="center">Equalizzatore</h6>
-	        	</div>
+	         		<div class = "row" align="center">
+	         			<div class="col-md-12 col-sm-12 col-xs-12">
+	         				<h6 align="center">Equalizzatore</h6>
+	         			</div>
+	         		</div> 
+	         		<div class = "row" align="center">    		
+		         		<div class="col-md-1 col-sm-1 col-xs-1"></div>
+		         		<div class="col-md-2 col-sm-2 col-xs-2">
+			         		<div class=slider-vertical id="slider_verticale" style="height:85px;"></div>
+			         		<text>H</text>
+			         	</div>
+			         	<div class="col-md-2 col-sm-2 col-xs-2">
+		         			<div class=slider-vertical id="slider_verticale" style="height:85px;"></div>
+		         			<text>HM</text>
+		         		</div>
+		         		<div class="col-md-2 col-sm-2 col-xs-2">
+		         			<div class=slider-vertical id="slider_verticale" style="height:85px;"></div>
+		         			<text>M</text>
+		         		</div>	
+		         		<div class="col-md-2 col-sm-2 col-xs-2">
+		         			<div class=slider-vertical id="slider_verticale" style="height:85px;"></div>
+		         			<text>LM</text>
+		         		</div>	
+		         		<div class="col-md-2 col-sm-2 col-xs-2 ">
+		         			<div class=slider-vertical id="slider_verticale" style="height:85px;"></div>
+		         			<text>L</text>
+			        	</div>
+			        	<div class="col-md-1 col-sm-1 col-xs-1"></div>
+			        </div>
+			     </div>
 	        </div>
 	      <!-- Riga del blocco della scelta dell'eq -->	
 	      <div class = "row" id="custom_eq_tr1">
-         		<div class="col-md-12 col-sm-12 col-xs-12 echo">
-         			<h6>ECHO RadioEq</h6>
+         		<div class="col-md-12 col-sm-12 col-xs-12 custom_eq">
+         			<div class="multi_choice"> 
+         				<input type="radio" name="user_level" id="rd1" value="1"/>
+         				<img src="assets/images/eq.png" width="20"></img>
+						<label for="rd1">Rock</label><br/>
+						<input type="radio" name="user_level" id="rd2" value="2"/>
+						<img src="assets/images/eq.png" width="20"></img>
+						<label for="rd2">Classica</label><br/>
+						<input type="radio" name="user_level" id="rd3" value="3"/>
+						<img src="assets/images/eq.png" width="20"></img>
+						<label for="rd3">Dance</label><br/>
+						<input type="radio" name="user_level" id="rd4" value="4"/>
+         				<img src="assets/images/eq.png" width="20"></img>
+						<label for="rd1">Techno</label><br/>
+						<input type="radio" name="user_level" id="rd5" value="5"/>
+						<img src="assets/images/eq.png" width="20"></img>
+						<label for="rd3">Pop</label><br/>
+						<input type="radio" name="user_level" id="rd6" value="6"/>
+         				<img src="assets/images/eq.png" width="20"></img>
+						<label for="rd1">Melodico</label><br/>
+						<input type="radio" name="user_level" id="rd7" value="7"/>
+						<img src="assets/images/eq.png" width="20"></img>
+						<label for="rd3">Custom</label><br/>
+         			</div>
          		</div>
           </div>
  	  	  <!-- Riga del blocco echo -->
-	 	  <div class = "row" id="piastra_traccia2">
+	 	  <div class = "row" id="echo_traccia1">
          		<div class="col-md-12 col-sm-12 col-xs-12 echo">
-         			<h6>ECHO traccia 1</h6>
+         			<div class = "row" align="center">
+         				<div class="col-md-12 col-sm-12 col-xs-12">
+         					<h6>Echo</h6>
+         				</div>
+         			</div>
+         			<div class = "row">	
+         				<div class="col-md-12 col-sm-12 col-xs-12">
+         					<div id="progressbar"></div>
+         				</div>				
+         			</div>
+         			<div class = "row">
+         				<div class="col-md-12 col-sm-12 col-xs-12"></div>
+         					
+         			</div>
+         			<div class = "row" align="center">
+         				<div class="col-md-12 col-sm-12 col-xs-12"></div>
+         					<button class="ui-button ui-widget ui-corner-all" id="botton_in">IN</button>
+         					<button class="ui-button ui-widget ui-corner-all" id="botton_out">OUT</button>
+         			</div>
          		</div>
           </div>
          </div>
@@ -172,18 +324,53 @@
          	</div>
          	<div class = "row" id="pista_traccia1">
          		<div class="col-md-12 col-sm-12 col-xs-12 pista">
-         			<h6>PIASTA traccia 1</h6>
-         		</div>
+         			<div class = "row" align="center">
+         				<div class="col-md-2 col-sm-2 col-xs-2">
+         					<div class=slider-vertical id="slider_verticale_velocità_1" style="height:150px;"></div>
+         					<text>Velocità</text>
+         				</div>
+         				<div class="col-md-8 col-sm-8 col-xs-8">
+         					<img src="assets/images/piastra.png" id="piastra1" width="200"></img>
+         					<audio id="audio1"></audio>
+         				</div>
+         				<div class="col-md-2 col-sm-2 col-xs-2">
+         					<div class=slider-vertical id="slider_verticale_volume_1" style="height:150px;"></div>
+         					<text>Volume</text>
+         				</div>
+         			</div>
+         			<div class = "row" align="center">
+         				<div class="col-md-3 col-sm-3 col-xs-3">
+         					<button class="ui-button ui-widget ui-corner-all" id="button_cue">CUE</button>
+         				</div>
+         				<div class="col-md-6 col-sm-6 col-xs-6">
+         					<button class="ui-button ui-widget ui-corner-all" id="button_play1" onclick="play_track_1()">Play</button>
+         					<button class="ui-button ui-widget ui-corner-all" id="button_pause1" onclick="pause_track_1()">Pausa</button>
+         					<button class="ui-button ui-widget ui-corner-all" id="button_stop1" onclick="stop_track_1()">Stop</button>
+         				</div>
+         				<div class="col-md-3 col-sm-3 col-xs-3">
+         					<button class="ui-button ui-widget ui-corner-all" id="button_sync1">SYNC</button>
+         				</div>
+         			</div>
+         			<div class = "row" align="center">
+         				<div class="col-md-12 col-sm-12 col-xs-12">
+         					<button class="ui-button ui-widget ui-corner-all" id="button_play1">ECHO</button>
+         					<button class="ui-button ui-widget ui-corner-all" id="button_pause1">FLANGER</button>
+         					<button class="ui-button ui-widget ui-corner-all" id="button_stop1">BRAKE</button>
+         				</div>
+         			</div>
+ 				</div>
          	</div>
         </div>
         
         <div class="col-md-2 col-sm-2 col-xs-2"> 
          	<div class = "row" id="dettaglio_tracce">
          		<div class="col-md-6 col-sm-6 col-xs-6 spettro-dett-min-automix">
-         			<h6>Dettaglio tracce1</h6>
+         			<h1 id="titolo_dettaglio1"></h1>
+					<h2 id="autore_dettaglio1"></h2>
          		</div>
          		<div class="col-md-6 col-sm-6 col-xs-6 spettro-dett-min-automix">
-         			<h6>Dettaglio tracce2</h6>
+         			<h1 id="titolo_dettaglio2"></h1>
+					<h2 id="autore_dettaglio2"></h2>
          		</div>
          	</div>
          	<div class = "row" id="dettaglio_minutaggi">
@@ -218,11 +405,7 @@
          	</div>         	        	
          	<div class = "row" id="automix">
          		<div class="col-md-12 col-sm-12 col-xs-12 spettro-dett-min-automix">
-         			<div class="range-slider vertical-range">
-         				<span class="range-slider-handle" role="slider" tabindex="0"></span>
-  						<span class="range-slider-active-segment"></span>
-         				<input type="range"  min="0" max="100"/>
-         			</div>
+         			<div id="slider_automix"></div>
 				</div>
          	</div>
         </div>
@@ -234,8 +417,41 @@
          		</div>
          	</div>
          	<div class = "row" id="pista_traccia2">
-         		<div class="col-md-12 col-sm-12 col-xs-12 pista">
-         			<h6>PISTA traccia 2</h6>
+        			<div class="col-md-12 col-sm-12 col-xs-12 pista">
+         			<div class = "row" align="center">
+         				<div class="col-md-2 col-sm-2 col-xs-2">
+         					<div class=slider-vertical id="slider_verticale_volume_2" style="height:150px;"></div>
+         					<text>Volume</text>
+         				</div>
+         				<div class="col-md-8 col-sm-8 col-xs-8">
+         					<img src="assets/images/piastra.png" id="piastra2" width="200"></img>
+         					<audio id="audio2"></audio>
+         				</div>
+         				<div class="col-md-2 col-sm-2 col-xs-2">
+         					<div class=slider-vertical id="slider_verticale_velocità_2" style="height:150px;"></div>
+         					<text>Velocità</text>
+         				</div>
+         			</div>
+         			<div class = "row" align="center">
+         				<div class="col-md-3 col-sm-3 col-xs-3">
+         					<button class="ui-button ui-widget ui-corner-all" id="button_cue">CUE</button>
+         				</div>
+         				<div class="col-md-6 col-sm-6 col-xs-6">
+         					<button class="ui-button ui-widget ui-corner-all" id="botton_play2" onclick="play_track_2()">Play</button>
+         					<button class="ui-button ui-widget ui-corner-all" id="botton_pause2" onclick="pause_track_2()">Pausa</button>
+         					<button class="ui-button ui-widget ui-corner-all" id="botton_stop2" onclick="stop_track_2()">Stop</button>
+         				</div>
+         				<div class="col-md-3 col-sm-3 col-xs-3">
+         					<button class="ui-button ui-widget ui-corner-all" id="botton_sync">SYNC</button>
+         				</div>
+         			</div>
+         			<div class = "row" align="center">
+         				<div class="col-md-12 col-sm-12 col-xs-12">
+         					<button class="ui-button ui-widget ui-corner-all" id="botton_play">ECHO</button>
+         					<button class="ui-button ui-widget ui-corner-all" id="botton_pause">FLANGER</button>
+         					<button class="ui-button ui-widget ui-corner-all" id="botton_stop">BRAKE</button>
+         				</div>
+         			</div>
          		</div>
          	</div>
         </div>
@@ -244,19 +460,87 @@
          	<!-- Riga del blocco equalizzazione -->
          	<div class = "row" id="spettro_traccia2">
          		<div class="col-md-12 col-sm-12 col-xs-12 eq">
-         			<h6 align="center">Equalizzatore</h6>
+	         		<div class = "row" align="center">
+	         			<div class="col-md-12 col-sm-12 col-xs-12">
+	         				<h6 align="center">Equalizzatore</h6>
+	         			</div>
+	         		</div> 
+	         		<div class = "row" align="center">    		
+		         		<div class="col-md-1 col-sm-1 col-xs-1"></div>
+		         		<div class="col-md-2 col-sm-2 col-xs-2">
+			         		<div class=slider-vertical id="slider_verticale" style="height:85px;"></div>
+			         		<text>H</text>
+			         	</div>
+			         	<div class="col-md-2 col-sm-2 col-xs-2">
+		         			<div class=slider-vertical id="slider_verticale" style="height:85px;"></div>
+		         			<text>HM</text>
+		         		</div>
+		         		<div class="col-md-2 col-sm-2 col-xs-2">
+		         			<div class=slider-vertical id="slider_verticale" style="height:85px;"></div>
+		         			<text>M</text>
+		         		</div>	
+		         		<div class="col-md-2 col-sm-2 col-xs-2">
+		         			<div class=slider-vertical id="slider_verticale" style="height:85px;"></div>
+		         			<text>LM</text>
+		         		</div>	
+		         		<div class="col-md-2 col-sm-2 col-xs-2 ">
+		         			<div class=slider-vertical id="slider_verticale" style="height:85px;"></div>
+		         			<text>L</text>
+			        	</div>
+			        	<div class="col-md-1 col-sm-1 col-xs-1"></div>
+			        </div>
          		</div>
          	</div>
          	<!-- Riga del blocco della scelta dell'eq -->	
 	      	<div class = "row" id="custom_eq_tr1">
-         		<div class="col-md-12 col-sm-12 col-xs-12 echo">
-         			<h6>ECHO RadioEq</h6>
+         		<div class="col-md-12 col-sm-12 col-xs-12 custom_eq">
+         			<div class="multi_choice"> 
+         				<input type="radio" name="user_level" id="rd1" value="1"/>
+         				<img src="assets/images/eq.png" width="20"></img>
+						<label for="rd1">Rock</label><br/>
+						<input type="radio" name="user_level" id="rd2" value="2"/>
+						<img src="assets/images/eq.png" width="20"></img>
+						<label for="rd2">Classica</label><br/>
+						<input type="radio" name="user_level" id="rd3" value="3"/>
+						<img src="assets/images/eq.png" width="20"></img>
+						<label for="rd3">Dance</label><br/>
+						<input type="radio" name="user_level" id="rd4" value="4"/>
+         				<img src="assets/images/eq.png" width="20"></img>
+						<label for="rd1">Techno</label><br/>
+						<input type="radio" name="user_level" id="rd5" value="5"/>
+						<img src="assets/images/eq.png" width="20"></img>
+						<label for="rd3">Pop</label><br/>
+						<input type="radio" name="user_level" id="rd6" value="6"/>
+         				<img src="assets/images/eq.png" width="20"></img>
+						<label for="rd1">Melodico</label><br/>
+						<input type="radio" name="user_level" id="rd7" value="7"/>
+						<img src="assets/images/eq.png" width="20"></img>
+						<label for="rd3">Custom</label><br/>
+         			</div>
          		</div>
           	</div>
          	<!-- Riga del blocco echo -->
-         	<div class = "row" id="piastra_traccia2">
+         	<div class = "row" id="echo_traccia2">
          		<div class="col-md-12 col-sm-12 col-xs-12 echo">
-         			<h6>ECHO traccia 2</h6>
+         			<div class = "row" align="center">
+         				<div class="col-md-12 col-sm-12 col-xs-12">
+         					<h6>Echo</h6>
+         				</div>
+         			</div>
+         			<div class = "row">	
+         				<div class="col-md-12 col-sm-12 col-xs-12">
+         					<div id="progressbar"></div>
+         				</div>				
+         			</div>
+         			<div class = "row">
+         				<div class="col-md-12 col-sm-12 col-xs-12"></div>
+         					
+         			</div>
+         			<div class = "row" align="center">
+         				<div class="col-md-12 col-sm-12 col-xs-12"></div>
+         					<button class="ui-button ui-widget ui-corner-all" id="botton_in">IN</button>
+         					<button class="ui-button ui-widget ui-corner-all" id="botton_out">OUT</button>
+         			</div>
          		</div>
          	</div>
         </div>
