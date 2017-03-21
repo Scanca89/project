@@ -23,13 +23,16 @@
 		<script src="assets/plugins/jQueryFileTree/jQueryFileTree.js" type="text/javascript"></script>
 		<script src="assets/plugins/id3-master/id3.js"></script>
 		<script src="assets/plugins/jquery-ui-1.12.1.custom/jquery-ui.min.js"></script>
+		<script src="assets/plugins/wavesurfer/wavesurfer.js"></script>
 		
 		<script type="text/javascript">
 						 
 			var audioElm1;
+			var wavesurfer_tr1
 			var audioElm2;
+			var wavesurfer_tr2
 			var audioURL;
-		
+								
 			function setTagsScheda(name,tags){
 				var scheda_id = "#scheda_" + name;				
 				if(tags != null)
@@ -39,27 +42,115 @@
 			}
 			
 			$(document).ready( function() {
+								
+				wavesurfer_tr1 = WaveSurfer.create({
+					container: '#waveform_traccia1',
+					waveColor: 'red',
+					progressColor: 'darkred',
+					height: '80'
+				});
+				
+				wavesurfer_tr2 = WaveSurfer.create({
+					container: '#waveform_traccia2',
+					waveColor: 'blue',
+					progressColor: 'darkblue',
+					height: '80'
+				});
 				
 				$( function() {
-				    $( "#progressbar" ).progressbar({
+				    $( "#progressbar_tr1" ).progressbar({
 				      value: 37
 				    });
 				} );
+				
+				$( function() {
+				    $( "#progressbar_tr2" ).progressbar({
+				      value: 37
+				    });
+				} );
+				
+				$( function() {
+			    	$( ".slider-vertical" ).slider({
+			    		orientation: "vertical",
+					    range: "min",
+					    min: 0,
+					    max: 100,
+					    value: 50,
+					    slide: function( event, ui ) {
+					    }
+			    	});
+			  	});
 			  	
 			
 			  	$( function() {
-			    	$( "#slider_automix" ).slider();
+			    	$( "#slider_automix" ).slider({
+			    		min: 0,
+			    		max: 100,
+			    		value: 50,
+			    		slide: function (event, ui){
+			    			if(ui.value < 50){
+			    				wavesurfer_tr2.setVolume(ui.value/100);
+			    			}else{
+			    				wavesurfer_tr1.setVolume((ui.value-100)/100);
+			    			}
+			    		}
+			    	});
 			  	} );
 			  
 			  	$( function() {
-			  		$( ".slider-vertical" ).slider({
+			  		$( "#slider-vertical_volume1" ).slider({
+				      orientation: "vertical",
+				      range: "min",
+				      min: 0,
+				      max: 100,
+				      value: 100,
+				      slide: function( event, ui ) {
+				        wavesurfer_tr1.setVolume(ui.value/100);
+				      }
+				    });
+				} );
+			  	
+			  	$( function() {
+			  		$( "#slider-vertical_volume2" ).slider({
+				      orientation: "vertical",
+				      range: "min",
+				      min: 0,
+				      max: 100,
+				      value: 100,
+				      slide: function( event, ui ) {
+				        wavesurfer_tr2.setVolume(ui.value/100);
+				      }
+				    });
+				} );
+			  	
+			  	$( function() {
+			  		$( "#slider-vertical_velocità1" ).slider({
 				      orientation: "vertical",
 				      range: "min",
 				      min: 0,
 				      max: 100,
 				      value: 50,
 				      slide: function( event, ui ) {
-				        
+				    	  if(ui.value > 50)
+				    	  	wavesurfer_tr1.setPlaybackRate((ui.value/100)*2);
+				    	  else
+				    		wavesurfer_tr1.setPlaybackRate(ui.value/100);
+				      }
+				    });
+				} );
+			  	
+			  	$( function() {
+			  		$( "#slider-vertical_velocità2" ).slider({
+				      orientation: "vertical",
+				      range: "min",
+				      min: 0,
+				      max: 100,
+				      value: 50,
+				      slide: function( event, ui ) {
+				    	  if(ui.value > 50)
+					    	  	wavesurfer_tr2.setPlaybackRate((ui.value/100)*2);
+					    	  else
+					    		wavesurfer_tr2.setPlaybackRate(ui.value/100);
 				      }
 				    });
 				} );
@@ -79,7 +170,6 @@
 			        	}
 			        )
 			        .on('initree', function(e, data) {
-						//alert('inizializzazione file tree avvenuta');
 						$(".file a").each(function( index ) {
 							if(index == 0){
 								$(this).click();
@@ -154,7 +244,12 @@
 				        		    	audioElm1 = document.getElementById("audio1");
 				        		    	curruent_audioURL = audioURL;
 				        		    	audioElm1.src = curruent_audioURL.replace('./jsdj/','./');
-				        		    	console.log(audioElm1.duration);
+				        		    	wavesurfer_tr1.load(audioElm1.src);
+				    					wavesurfer_tr1.on('ready', function(){
+				    						var durata_tr1 = wavesurfer_tr1.getDuration();
+				    						$('#totale_tr1').text(durata_tr1);	
+				    						
+				    					})
 				        		    	$('#titolo_dettaglio1').text(titolo);
 				        		    	$('#autore_dettaglio1').text(autore);
 				                     }
@@ -167,8 +262,14 @@
 				        		    	audioElm2 = document.getElementById("audio2");
 				        		    	curruent_audioURL = audioURL;
 				        		    	audioElm2.src = curruent_audioURL.replace('./jsdj/','./');
+				        		    	wavesurfer_tr2.load(audioElm2.src);
+				        		    	wavesurfer_tr2.on('ready', function(){
+				    						var durata_tr2 = wavesurfer_tr2.getDuration();
+				    						$('#totale_tr2').text(durata_tr2);				    											
+				    					})
 				        		    	$('#titolo_dettaglio2').text(titolo);
 				        		    	$('#autore_dettaglio2').text(autore);
+			
 				        		    }
 				        		})
 							});	
@@ -196,25 +297,23 @@
 		    });
 			
 			function play_track_1(){
-				audioElm1.play();
+				wavesurfer_tr1.play();
 			}
 			function pause_track_1(){
-				audioElm1.pause();
+				wavesurfer_tr1.playPause();
 			}
-			function stop_track_1(){
-				audioElm1.pause();
-				audioElm1.currentTime=0;
+			function stop_track_1(){			
+				wavesurfer_tr1.stop();
 			}
 			
 			function play_track_2(){
-				audioElm2.play();
+				wavesurfer_tr2.play();
 			}
 			function pause_track_2(){
-				audioElm2.pause();
+				wavesurfer_tr2.playPause();
 			}
 			function stop_track_2(){
-				audioElm2.pause();
-				audioElm2.currentTime=0;
+				wavesurfer_tr2.stop();
 			}
 			
 		</script>
@@ -300,7 +399,7 @@
          			</div>
          			<div class = "row">	
          				<div class="col-md-12 col-sm-12 col-xs-12">
-         					<div id="progressbar"></div>
+         					<div id="progressbar_tr1"></div>
          				</div>				
          			</div>
          			<div class = "row">
@@ -319,22 +418,23 @@
         <div class="col-md-3 col-sm-3 col-xs-3"> 
          	<div class = "row" id="spettro_traccia1">
          		<div class="col-md-12 col-sm-12 col-xs-12 spettro-dett-min-automix">
-         			<h6>SPETTRO traccia 1</h6>
+         			<div id="waveform_traccia1"></div>
          		</div>
          	</div>
          	<div class = "row" id="pista_traccia1">
          		<div class="col-md-12 col-sm-12 col-xs-12 pista">
          			<div class = "row" align="center">
          				<div class="col-md-2 col-sm-2 col-xs-2">
-         					<div class=slider-vertical id="slider_verticale_velocità_1" style="height:150px;"></div>
+         					<div class=slider-vertical_velocità id="slider-vertical_velocità1" style="height:150px;"></div>
          					<text>Velocità</text>
          				</div>
          				<div class="col-md-8 col-sm-8 col-xs-8">
          					<img src="assets/images/piastra.png" id="piastra1" width="200"></img>
+         					<div position="absolute">AAA</div>
          					<audio id="audio1"></audio>
          				</div>
          				<div class="col-md-2 col-sm-2 col-xs-2">
-         					<div class=slider-vertical id="slider_verticale_volume_1" style="height:150px;"></div>
+         					<div class=slider-vertical_volume id="slider-vertical_volume1" style="height:150px;"></div>
          					<text>Volume</text>
          				</div>
          			</div>
@@ -375,16 +475,14 @@
          	</div>
          	<div class = "row" id="dettaglio_minutaggi">
          		<div class="col-md-6 col-sm-6 col-xs-6 dett_min">
-         			<h6>Rimane1</h6>
+         			<h6>Rimane1</h6>         			
          			<h6>00:00:00</h6>
-         			<h6>Totlale1</h6>
-         			<h6>00:00:00</h6>
+         			<h6 id="totale_tr1">00:00:00</h6>
          		</div>
          		<div class="col-md-6 col-sm-6 col-xs-6 dett_min">
          			<h6>Rimane2</h6>
          			<h6>00:00:00</h6>
-         			<h6>Totlale2</h6>
-         			<h6>00:00:00</h6>
+         			<h6 id="totale_tr2">00:00:00</h6>
          		</div>
          	</div>
          	<div class = "row" id="dettaglio_minutaggi_attuali">
@@ -413,14 +511,14 @@
         <div class="col-md-3 col-sm-3 col-xs-3">
          	<div class = "row" id="spettro_traccia2">
          		<div class="col-md-12 col-sm-12 col-xs-12 spettro-dett-min-automix">
-         			<h6>SPETTRO traccia 2</h6>
+         			<div id="waveform_traccia2"></div>
          		</div>
          	</div>
          	<div class = "row" id="pista_traccia2">
         			<div class="col-md-12 col-sm-12 col-xs-12 pista">
          			<div class = "row" align="center">
          				<div class="col-md-2 col-sm-2 col-xs-2">
-         					<div class=slider-vertical id="slider_verticale_volume_2" style="height:150px;"></div>
+         					<div class=slider-vertical_volume id="slider-vertical_volume2" style="height:150px;"></div>
          					<text>Volume</text>
          				</div>
          				<div class="col-md-8 col-sm-8 col-xs-8">
@@ -428,7 +526,7 @@
          					<audio id="audio2"></audio>
          				</div>
          				<div class="col-md-2 col-sm-2 col-xs-2">
-         					<div class=slider-vertical id="slider_verticale_velocità_2" style="height:150px;"></div>
+         					<div class=slider-vertical_velocità id="slider-vertical_velocità2" style="height:150px;"></div>
          					<text>Velocità</text>
          				</div>
          			</div>
@@ -529,7 +627,7 @@
          			</div>
          			<div class = "row">	
          				<div class="col-md-12 col-sm-12 col-xs-12">
-         					<div id="progressbar"></div>
+         					<div id="progressbar_tr2"></div>
          				</div>				
          			</div>
          			<div class = "row">
@@ -541,7 +639,6 @@
          					<button class="ui-button ui-widget ui-corner-all" id="botton_in">IN</button>
          					<button class="ui-button ui-widget ui-corner-all" id="botton_out">OUT</button>
          			</div>
-         		</div>
          	</div>
         </div>
       </div>
@@ -562,7 +659,7 @@
 				</table>
 			</div>	
          </div>
-         <div class="col-md-3 col-sm-3 col-xs-3 riga2" id="mp3_scheda">
+         <div class="col-md-3 col-sm-3 col-xs-3 riga2" id="mp3_scheda">f
         		<div class="col-md-12 col-sm-12 col-xs-12 riga2">
 					<div id="TabMp3" class="scheda_mp3">
 						<div class="scheda" id="scheda">
