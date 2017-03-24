@@ -37,8 +37,8 @@
          	<!-- Riga del blocco equalizzazione -->
          	<div class = "row" id="eq_tr_1" align="center"> 
          		<div class="col-md-12 col-sm-12 col-xs-12 eq">
-	         		<div class = "row" align="center">    		
-		         		<div class="col-md-1 col-sm-1 col-xs-1"></div>
+	         		<div class = "row" id="eq_tr1" align="center">    		
+		         	<div class="col-md-1 col-sm-1 col-xs-1"></div>
 		         		<div class="col-md-2 col-sm-2 col-xs-2">
 			         		<div class=slider-vertical id="slider_verticale" style="height:85px;"></div>
 			         		<text>H</text>
@@ -66,29 +66,30 @@
 	      <!-- Riga del blocco della scelta dell'eq -->	
 	      <div class = "row" id="custom_eq_tr1">
          		<div class="col-md-12 col-sm-12 col-xs-12 custom_eq">
-         			<div class="multi_choice"> 
-         				<input type="radio" name="user_level" id="rd1" value="1"/>
+         			<button class="ui-button ui-widget ui-corner-all btn-eq" id="button_rock">
+         				<h7>ROCK</h7>
          				<img src="assets/images/eq.png" width="20"></img>
-						<label for="rd1">Rock</label><br/>
-						<input type="radio" name="user_level" id="rd2" value="2"/>
-						<img src="assets/images/eq.png" width="20"></img>
-						<label for="rd2">Classica</label><br/>
-						<input type="radio" name="user_level" id="rd3" value="3"/>
-						<img src="assets/images/eq.png" width="20"></img>
-						<label for="rd3">Dance</label><br/>
-						<input type="radio" name="user_level" id="rd4" value="4"/>
+         			</button>
+         			<button class="ui-button ui-widget ui-corner-all btn-eq" id="button_classica">
+         				<h7  align="center">CLASSICA</h7>
          				<img src="assets/images/eq.png" width="20"></img>
-						<label for="rd1">Techno</label><br/>
-						<input type="radio" name="user_level" id="rd5" value="5"/>
-						<img src="assets/images/eq.png" width="20"></img>
-						<label for="rd3">Pop</label><br/>
-						<input type="radio" name="user_level" id="rd6" value="6"/>
+         			</button>
+         			<button class="ui-button ui-widget ui-corner-all btn-eq" id="button_dance">
+         				DANCE
          				<img src="assets/images/eq.png" width="20"></img>
-						<label for="rd1">Melodico</label><br/>
-						<input type="radio" name="user_level" id="rd7" value="7"/>
-						<img src="assets/images/eq.png" width="20"></img>
-						<label for="rd3">Custom</label><br/>
-         			</div>
+         			</button>
+         			<button class="ui-button ui-widget ui-corner-all btn-eq" id="button_techno">
+         				TECHNO
+         				<img src="assets/images/eq.png" width="20"></img>
+         			</button>
+         			<button class="ui-button ui-widget ui-corner-all btn-eq" id="button_pop">
+         				POP
+         				<img src="assets/images/eq.png" width="20"></img>
+         			</button>
+         			<button class="ui-button ui-widget ui-corner-all btn-eq" id="button_custom">
+         				CUSTOM
+         				<img src="assets/images/eq.png" width="20"></img>
+         			</button>
          		</div>
           </div>
  	  	  <!-- Riga del blocco echo -->
@@ -99,22 +100,26 @@
          					<h6>Echo</h6>
          				</div>
          			</div>
-         			<div class = "row">	
+         			<div class = "row" align="center">	
          				<div class="col-md-12 col-sm-12 col-xs-12">
-         					<div id="progressbar_tr1"></div>
+	         				<div class="progress">	
+	         					<div class="progress-bar" id="" role="progressbar" aria-valuenow="70"
+	         					aria-valuemin="0" aria-valuemax="100" style="width:50%">
+	  							</div>
+	  						</div>
          				</div>				
          			</div>
-         			<div class = "row">
+         			<div class = "row" align="center">
          				<div class="col-md-12 col-sm-12 col-xs-12">
-         					<div class="input-group_tr1">
-						    	<input id="spinner_tr1" name="value">    
+         					<div class="input-group">
+						    	<input class="int-spinner" id="spinner_tr1" name="value">    
 						    </div>
          				</div>
          			</div>
          			<div class = "row" align="center">
          				<div class="col-md-12 col-sm-12 col-xs-12">
-         					<button class="ui-button ui-widget ui-corner-all" id="botton_in">IN</button>
-         					<button class="ui-button ui-widget ui-corner-all" id="botton_out">OUT</button>
+         					<button class="ui-button ui-widget ui-corner-all my-btn" id="botton_in">IN</button>
+         					<button class="ui-button ui-widget ui-corner-all my-btn" id="botton_out">OUT</button>
          				</div>
          			</div>
          		</div>
@@ -122,8 +127,14 @@
          </div>
         
         <div class="col-md-3 col-sm-3 col-xs-3"> 
+         	<div class = "row" id="titolo_tr1">
+         		<div class="col-md-12 col-sm-12 col-xs-12 bpm-titolo-spettro" align="center">
+         			<h1 id="titolo_dettaglio1"></h1>
+					<h2 id="autore_dettaglio1"></h2>
+         		</div>
+         	</div>         	
          	<div class = "row" id="spettro_traccia1">
-         		<div class="col-md-12 col-sm-12 col-xs-12 spettro-dett-min-automix">
+         		<div class="col-md-12 col-sm-12 col-xs-12 bpm-titolo-spettro">
          			<div id="waveform_traccia1"></div>
          		</div>
          	</div>
@@ -147,28 +158,28 @@
          			</div>
          			<div class = "row" align="center">
          				<div class="col-md-3 col-sm-3 col-xs-3">
-         					<button class="ui-button ui-widget ui-corner-all" id="button_cue">CUE</button>
+         					<button class="ui-button ui-widget ui-corner-all my-btn" id="button_cue">CUE</button>
          				</div>
          				<div class="col-md-6 col-sm-6 col-xs-6">
-         					<button class="ui-button ui-widget ui-corner-all" id="button_play1" onclick="play_track_1()">
+         					<button class="ui-button ui-widget ui-corner-all my-btn" id="button_play1" onclick="play_track_1()">
          						<i class="fa fa-play" aria-hidden="true"></i>	
          					</button>
-         					<button class="ui-button ui-widget ui-corner-all" id="button_pause1" onclick="pause_track_1()">
+         					<button class="ui-button ui-widget ui-corner-all my-btn" id="button_pause1" onclick="pause_track_1()">
          						<i class="fa fa-pause" aria-hidden="true"></i>
          					</button>
-         					<button class="ui-button ui-widget ui-corner-all" id="button_stop1" onclick="stop_track_1()">
+         					<button class="ui-button ui-widget ui-corner-all my-btn" id="button_stop1" onclick="stop_track_1()">
          						<i class="fa fa-stop" aria-hidden="true"></i>
          					</button>
          				</div>
          				<div class="col-md-3 col-sm-3 col-xs-3">
-         					<button class="ui-button ui-widget ui-corner-all" id="button_sync1">SYNC</button>
+         					<button class="ui-button ui-widget ui-corner-all my-btn" id="button_sync1">SYNC</button>
          				</div>
          			</div>
          			<div class = "row"  align="center">
          				<div class="col-md-12 col-sm-12 col-xs-12" id="effects_tr1" style="margin-top: 20px;">
-         					<button class="ui-button ui-widget ui-corner-all" id="button_echo1">ECHO</button>
-         					<button class="ui-button ui-widget ui-corner-all" id="button_flanger1">FLANGER</button>
-         					<button class="ui-button ui-widget ui-corner-all" id="button_brake1">BRAKE</button>
+         					<button class="ui-button ui-widget ui-corner-all my-btn" id="button_echo1">ECHO</button>
+         					<button class="ui-button ui-widget ui-corner-all my-btn" id="button_flanger1">FLANGER</button>
+         					<button class="ui-button ui-widget ui-corner-all my-btn" id="button_brake1">BRAKE</button>
          				</div>
          			</div>
  				</div>
@@ -176,52 +187,54 @@
         </div>
         
         <div class="col-md-2 col-sm-2 col-xs-2"> 
-         	<div class = "row" id="dettaglio_tracce">
-         		<div class="col-md-6 col-sm-6 col-xs-6 spettro-dett-min-automix">
-         			<h1 id="titolo_dettaglio1"></h1>
-					<h2 id="autore_dettaglio1"></h2>
+         	<div class = "row" id="dettaglio_minutaggio_attuale">
+         		<div class="col-md-6 col-sm-6 col-xs-6 min-att">
+         			<h6 id="min-att-tr1">00:00</h6>
          		</div>
-         		<div class="col-md-6 col-sm-6 col-xs-6 spettro-dett-min-automix">
+         		<div class="col-md-6 col-sm-6 col-xs-6 min-att" align="right">
+         			<h6 id="min-att-tr2">00:00</h6>
+         		</div>
+         	</div>
+         	<div class = "row" id="dettaglio_minutaggio_rimanete">
+         		<div class="col-md-6 col-sm-6 col-xs-6 min-automix">
+         			<h6 id="min-rim-tr1">00:00</h6>
+         		</div>
+         		<div class="col-md-6 col-sm-6 col-xs-6 min-automix" align="right">
+         			<h6 id="min-rim-tr2">00:00</h6>
+         		</div>
+         	</div>
+         	<div class = "row" id="dettaglio_minutaggio_totale">
+         		<div class="col-md-6 col-sm-6 col-xs-6 min-automix">    			
+         			<h6 id="min-tot-tr1">00:00</h6>
+         		</div>
+         		<div class="col-md-6 col-sm-6 col-xs-6 min-automix" align="right">
+         			<h6 id="min-tot-tr2">00:00</h6>
+         		</div>
+         	</div>
+         	<div class = "row" id="dettaglio_bpm">
+         		<div class="col-md-6 col-sm-6 col-xs-6 bpm-titolo-spettro" id="bpm-tr1">
+         			<h6>120 bpm</h6>
+         		</div>
+         		<div class="col-md-6 col-sm-6 col-xs-6 bpm-titolo-spettro" id="bpm-tr2" align="right">
+         			<h6>120 bpm</h6>
+         		</div>
+         	</div>
+         	<div class = "row" id="automix">
+       			<div class="col-md-12 col-sm-12 col-xs-12 min-automix">
+       				<div id="slider_automix"></div>
+       			</div>
+			</div>
+       	</div>    	        	
+                
+        <div class="col-md-3 col-sm-3 col-xs-3">
+        	<div class = "row" id="titolo_tr1" >
+         		<div class="col-md-12 col-sm-12 col-xs-12 bpm-titolo-spettro" align="center">
          			<h1 id="titolo_dettaglio2"></h1>
 					<h2 id="autore_dettaglio2"></h2>
          		</div>
-         	</div>
-         	<div class = "row" id="dettaglio_minutaggi">
-         		<div class="col-md-6 col-sm-6 col-xs-6 dett_min">    			
-         			<h6>00:00:00</h6>
-         			<h6 id="totale_tr1">00:00:00</h6>
-         		</div>
-         		<div class="col-md-6 col-sm-6 col-xs-6 dett_min">
-         			<h6>00:00:00</h6>
-         			<h6 id="totale_tr2">00:00:00</h6>
-         		</div>
-         	</div>
-         	<div class = "row" id="dettaglio_minutaggi_attuali">
-         		<div class="col-md-6 col-sm-6 col-xs-6 spettro-dett-min-automix">
-         			<h6>00:00:00</h6>
-         		</div>
-         		<div class="col-md-6 col-sm-6 col-xs-6 spettro-dett-min-automix">
-         			<h6>00:00:00</h6>
-         		</div>
-         	<div class = "row" id="dettaglio_bpm">
-         		<div class="col-md-6 col-sm-6 col-xs-6 bpm">
-         			<h6>120 bpm</h6>
-         		</div>
-         		<div class="col-md-6 col-sm-6 col-xs-6 bpm">
-         			<h6>120 bpm</h6>
-         		</div>
-         	</div>
-         	</div>         	        	
-         	<div class = "row" id="automix">
-         		<div class="col-md-12 col-sm-12 col-xs-12 spettro-dett-min-automix">
-         			<div id="slider_automix"></div>
-				</div>
-         	</div>
-        </div>
-        
-        <div class="col-md-3 col-sm-3 col-xs-3">
+         	</div> 
          	<div class = "row" id="spettro_traccia2">
-         		<div class="col-md-12 col-sm-12 col-xs-12 spettro-dett-min-automix">
+         		<div class="col-md-12 col-sm-12 col-xs-12 bpm-titolo-spettro">
          			<div id="waveform_traccia2"></div>
          		</div>
          	</div>
@@ -231,7 +244,7 @@
          				<div class="col-md-2 col-sm-2 col-xs-2">
          					<div class=slider-vertical_volume id="slider-vertical_volume2" style="height:150px;"></div>
          					<text>Volume</text>
-         					<input type="tex" value="50" class="dial" data-width="30" data-height="30" data-min="0" data-max="100" data-displayInput="false" data-fgColor="#007BA7" data-skin="tron" data-thickness=".4" data-angleOffset="180" data-cursor=true>
+         					<input type="text" value="50" class="dial" data-width="30" data-height="30" data-min="0" data-max="100" data-displayInput="false" data-fgColor="#007BA7" data-skin="tron" data-thickness=".4" data-angleOffset="180" data-cursor=true>
          					<text>Gain</text>
          				</div>
          				<div class="col-md-8 col-sm-8 col-xs-8">
@@ -245,28 +258,28 @@
          			</div>
          			<div class = "row" align="center">
          				<div class="col-md-3 col-sm-3 col-xs-3">
-         					<button class="ui-button ui-widget ui-corner-all" id="button_cue">CUE</button>
+         					<button class="ui-button ui-widget ui-corner-all my-btn" id="button_cue">CUE</button>
          				</div>
          				<div class="col-md-6 col-sm-6 col-xs-6">
-         					<button class="ui-button ui-widget ui-corner-all" id="botton_play2" onclick="play_track_2()">
+         					<button class="ui-button ui-widget ui-corner-all my-btn" id="botton_play2" onclick="play_track_2()">
          						<i class="fa fa-play" aria-hidden="true"></i>
          					</button>
-         					<button class="ui-button ui-widget ui-corner-all" id="botton_pause2" onclick="pause_track_2()">
+         					<button class="ui-button ui-widget ui-corner-all my-btn" id="botton_pause2" onclick="pause_track_2()">
          						<i class="fa fa-pause" aria-hidden="true"></i>
          					</button>
-         					<button class="ui-button ui-widget ui-corner-all" id="botton_stop2" onclick="stop_track_2()">
+         					<button class="ui-button ui-widget ui-corner-all my-btn" id="botton_stop2" onclick="stop_track_2()">
          						<i class="fa fa-stop" aria-hidden="true"></i>
          					</button>
          				</div>
          				<div class="col-md-3 col-sm-3 col-xs-3">
-         					<button class="ui-button ui-widget ui-corner-all" id="botton_sync">SYNC</button>
+         					<button class="ui-button ui-widget ui-corner-all my-btn" id="botton_sync">SYNC</button>
          				</div>
          			</div>
          			<div class = "row" align="center">
          				<div class="col-md-12 col-sm-12 col-xs-12" style="margin-top: 20px;">
-         					<button class="ui-button ui-widget ui-corner-all" id="botton_echo2">ECHO</button>
-         					<button class="ui-button ui-widget ui-corner-all" id="botton_flanger2">FLANGER</button>
-         					<button class="ui-button ui-widget ui-corner-all" id="botton_brake2">BRAKE</button>
+         					<button class="ui-button ui-widget ui-corner-all my-btn" id="botton_echo2">ECHO</button>
+         					<button class="ui-button ui-widget ui-corner-all my-btn" id="botton_flanger2">FLANGER</button>
+         					<button class="ui-button ui-widget ui-corner-all my-btn" id="botton_brake2">BRAKE</button>
          				</div>
          			</div>
          		</div>
@@ -277,8 +290,8 @@
          	<!-- Riga del blocco equalizzazione -->
          	<div class = "row" id="spettro_traccia2">
          		<div class="col-md-12 col-sm-12 col-xs-12 eq">
-	         		<div class = "row" align="center">    		
-		         		<div class="col-md-1 col-sm-1 col-xs-1"></div>
+	         		<div class = "row" id ="eq_tr2" align="center">    		
+			         	<div class="col-md-1 col-sm-1 col-xs-1"></div>
 		         		<div class="col-md-2 col-sm-2 col-xs-2">
 			         		<div class=slider-vertical id="slider_verticale" style="height:85px;"></div>
 			         		<text>H</text>
@@ -304,31 +317,32 @@
          		</div>
          	</div>
          	<!-- Riga del blocco della scelta dell'eq -->	
-	      	<div class = "row" id="custom_eq_tr1">
+	      	<div class = "row" id="custom_eq_tr1" align="center">
          		<div class="col-md-12 col-sm-12 col-xs-12 custom_eq">
-         			<div class="multi_choice"> 
-         				<input type="radio" name="user_level" id="rd1" value="1"/>
+         			<button class="ui-button ui-widget ui-corner-all btn-eq" id="button_rock">
+         				<h7>ROCK</h7>
          				<img src="assets/images/eq.png" width="20"></img>
-						<label for="rd1">Rock</label><br/>
-						<input type="radio" name="user_level" id="rd2" value="2"/>
-						<img src="assets/images/eq.png" width="20"></img>
-						<label for="rd2">Classica</label><br/>
-						<input type="radio" name="user_level" id="rd3" value="3"/>
-						<img src="assets/images/eq.png" width="20"></img>
-						<label for="rd3">Dance</label><br/>
-						<input type="radio" name="user_level" id="rd4" value="4"/>
+         			</button>
+         			<button class="ui-button ui-widget ui-corner-all btn-eq" id="button_classica">
+         				<h7  align="center">CLASSICA</h7>
          				<img src="assets/images/eq.png" width="20"></img>
-						<label for="rd1">Techno</label><br/>
-						<input type="radio" name="user_level" id="rd5" value="5"/>
-						<img src="assets/images/eq.png" width="20"></img>
-						<label for="rd3">Pop</label><br/>
-						<input type="radio" name="user_level" id="rd6" value="6"/>
+         			</button>
+         			<button class="ui-button ui-widget ui-corner-all btn-eq" id="button_dance">
+         				DANCE
          				<img src="assets/images/eq.png" width="20"></img>
-						<label for="rd1">Melodico</label><br/>
-						<input type="radio" name="user_level" id="rd7" value="7"/>
-						<img src="assets/images/eq.png" width="20"></img>
-						<label for="rd3">Custom</label><br/>
-         			</div>
+         			</button>
+         			<button class="ui-button ui-widget ui-corner-all btn-eq" id="button_techno">
+         				TECHNO
+         				<img src="assets/images/eq.png" width="20"></img>
+         			</button>
+         			<button class="ui-button ui-widget ui-corner-all btn-eq" id="button_pop">
+         				POP
+         				<img src="assets/images/eq.png" width="20"></img>
+         			</button>
+         			<button class="ui-button ui-widget ui-corner-all btn-eq" id="button_custom">
+         				CUSTOM
+         				<img src="assets/images/eq.png" width="20"></img>
+         			</button>
          		</div>
           	</div>
          	<!-- Riga del blocco echo -->
@@ -339,20 +353,26 @@
          					<h6>Echo</h6>
          				</div>
          			</div>
-         			<div class = "row">	
+         			<div class = "row" align="center">	
          				<div class="col-md-12 col-sm-12 col-xs-12">
-         					<div id="progressbar_tr2"></div>
+         					 <div class="progress">
+  								<div class="progress-bar" role="progressbar" aria-valuenow="70"
+  								aria-valuemin="0" aria-valuemax="100" style="width:50%">
+  								</div>
+							</div>
          				</div>				
          			</div>
-         			<div class = "row">
+         			<div class = "row" align="center">
          				<div class="col-md-12 col-sm-12 col-xs-12">
-         					<input id="spinner_tr2" name="value"> 
+         					<div class="input-group">
+         						<input class="int-spinner" id="spinner_tr2" name="value">
+         					</div>
          				</div>	
          			</div>
          			<div class = "row" align="center">
          				<div class="col-md-12 col-sm-12 col-xs-12"></div>
-         					<button class="ui-button ui-widget ui-corner-all" id="botton_in">IN</button>
-         					<button class="ui-button ui-widget ui-corner-all" id="botton_out">OUT</button>
+         					<button class="ui-button ui-widget ui-corner-all my-btn" id="botton_in">IN</button>
+         					<button class="ui-button ui-widget ui-corner-all my-btn" id="botton_out">OUT</button>
          			</div>
          		</div>
         	</div>

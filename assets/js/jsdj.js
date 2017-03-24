@@ -3,7 +3,7 @@
 			var audioElm2;
 			var wavesurfer_tr2
 			var audioURL;
-										
+			
 			function setTagsScheda(name,tags){
 				var scheda_id = "#scheda_" + name;				
 				if(tags != null)
@@ -18,40 +18,15 @@
 					container: '#waveform_traccia1',
 					waveColor: 'red',
 					progressColor: 'darkred',
-					height: '80'
+					height: '40',
 				});
 				
 				wavesurfer_tr2 = WaveSurfer.create({
 					container: '#waveform_traccia2',
 					waveColor: 'blue',
 					progressColor: 'darkblue',
-					height: '80'
-				});
-				
-				$( function() {
-				    $( "#progressbar_tr1" ).progressbar({
-				      value: 37
-				    });
-				} );
-				
-				$( function() {
-				    $( "#progressbar_tr2" ).progressbar({
-				      value: 37
-				    });
-				} );
-				
-				$( function() {
-			    	$( ".slider-vertical" ).slider({
-			    		orientation: "vertical",
-					    range: "min",
-					    min: 0,
-					    max: 100,
-					    value: 50,
-					    slide: function( event, ui ) {
-					    }
-			    	});
-			  	});
-			  	
+					height: '40'
+				});			  	
 			
 			  	$( function() {
 			    	$( "#slider_automix" ).slider({
@@ -126,6 +101,42 @@
 				    });
 				} );
 			  	
+			  	$( function() {
+			    	$( ".slider-vertical" ).slider({
+			    		orientation: "vertical",
+					    range: "min",
+					    min: 0,
+					    max: 100,
+					    value: 50,
+					    slide: function( event, ui ) {
+					    }
+			    	});
+			  	});
+			  				  	
+			  	function seektimeupdate(wavesurfer,id_elem_cur, id_elem_rim){ 
+			  		var currentTime_tr1 = wavesurfer.getCurrentTime();
+					var curtimetext = document.getElementById(id_elem_cur);
+					var rimtimetext = document.getElementById(id_elem_rim);
+					var curmins = Math.floor(currentTime_tr1/ 60);
+					var cursecs = Math.floor(currentTime_tr1 - curmins * 60);
+				    if(cursecs < 10){ cursecs = "0"+cursecs; }
+				    if(curmins < 10){ curmins = "0"+curmins; }
+					curtimetext.innerHTML = curmins+":"+cursecs;
+					rimtimetext.innerHTML = curmins+":"+cursecs;
+			  	}
+			  	
+			  	function durationupdate(wavesurfer,id_elem){
+			  		var durata_tr1 = wavesurfer.getDuration();
+					var durtimetext = document.getElementById(id_elem);
+					var durmins = Math.floor(durata_tr1 / 60);
+					var dursecs = Math.floor(durata_tr1 - durmins * 60);
+					var durmins = Math.floor(durata_tr1 / 60);
+					var dursecs = Math.floor(durata_tr1 - durmins * 60);
+					if(dursecs < 10){ dursecs = "0"+dursecs; }
+					if(durmins < 10){ durmins = "0"+durmins; }
+					durtimetext.innerHTML = durmins+":"+dursecs;
+			  	}
+			  	
 				var windowFile;					
 				function initFilesTree(path) {
 					window.windowFile = $('#mp3Tree')
@@ -165,9 +176,8 @@
 			        		var genere = tags.v2.genre;
 			        		setTagsScheda('genere', genere);
 				        	var src = 'covers/' + autore + '_' + album + '.png';
-				        	var image = document.getElementById('copertina_scheda');
-				        	image.src = src;
-			        		
+				       		var image = document.getElementById('copertina_scheda');
+				       		image.src = src;
 			        		$( "li" ).each(function( index ) {
 				        		$(this).draggable({
 				        		    revert: "invalid", 
@@ -212,15 +222,19 @@
 				        		      	"ui-droppable-active": "ui-state-highlight"
 				        		    },
 				        		    drop: function(event,ui) {
+				        		    	var url =src.split(' ').join("_");
+				        		    	var urlString = "url(./" + url + ")";
+				        		    	document.getElementById("piastra1").style.backgroundImage = urlString;
 				        		    	audioElm1 = document.getElementById("audio1");
 				        		    	curruent_audioURL = audioURL;
 				        		    	audioElm1.src = curruent_audioURL.replace('./jsdj/','./');
 				        		    	wavesurfer_tr1.load(audioElm1.src);
-				    					/*wavesurfer_tr1.on('ready', function(){
-				    						var durata_tr1 = wavesurfer_tr1.getDuration();
-				    						$('#totale_tr1').text(durata_tr1);	
-				    						
-				    					})*/
+				    					wavesurfer_tr1.on('ready', function(){
+				    						durationupdate(wavesurfer_tr1,'min-tot-tr1');
+				    					});
+				    					wavesurfer_tr1.on('audioprocess', function(){
+				    						seektimeupdate(wavesurfer_tr1,'min-att-tr1','min-rim-tr1');
+				    					});
 				        		    	$('#titolo_dettaglio1').text(titolo);
 				        		    	$('#autore_dettaglio1').text(autore);
 				                     }
@@ -230,14 +244,20 @@
 				        		      "ui-droppable-active": "ui-state-highlight"
 				        		    },
 				        		    drop: function(event,ui) {
+				        		    	var url =src.split(' ').join("_");				        		    	
+				        		    	var urlString = "url(./" + url + ")";
+				        		    	console.log(urlString);
+				        		    	document.getElementById("piastra2").style.backgroundImage = urlString;
 				        		    	audioElm2 = document.getElementById("audio2");
 				        		    	curruent_audioURL = audioURL;
 				        		    	audioElm2.src = curruent_audioURL.replace('./jsdj/','./');
 				        		    	wavesurfer_tr2.load(audioElm2.src);
 				        		    	wavesurfer_tr2.on('ready', function(){
-				    						/*var durata_tr2 = wavesurfer_tr2.getDuration();
-				    						$('#totale_tr2').text(durata_tr2);*/		    											
-				    					})
+				    						durationupdate(wavesurfer_tr2,'min-tot-tr2');
+				    					});
+				    					wavesurfer_tr2.on('audioprocess', function(){
+				    						seektimeupdate(wavesurfer_tr2,'min-att-tr2','min-rim-tr2');
+				    					});
 				        		    	$('#titolo_dettaglio2').text(titolo);
 				        		    	$('#autore_dettaglio2').text(autore);
 			
@@ -287,10 +307,9 @@
 				wavesurfer_tr2.stop();
 			}
 			
-		    $(function() {
-		        $(".dial").knob({
+		    $(function() { 		    	
+		    	$(".dial").knob({
 		        	'change' : function(v) {
-		        		console.log(v);
 		        	}
 		        });
 		    });
@@ -320,5 +339,4 @@
 		            }
 		          }
 		        });
-		      } );
-		    
+		     });
