@@ -16,14 +16,14 @@
 								
 				wavesurfer_tr1 = WaveSurfer.create({
 					container: '#waveform_traccia1',
-					waveColor: 'red',
+					waveColor: '#d60000',
 					progressColor: 'darkred',
 					height: '40',
 				});
 				
 				wavesurfer_tr2 = WaveSurfer.create({
 					container: '#waveform_traccia2',
-					waveColor: 'blue',
+					waveColor: '#1048c8',
 					progressColor: 'darkblue',
 					height: '40'
 				});			  	
@@ -43,36 +43,36 @@
 			    	});
 			  	} );
 			  
-			  	$( function() {
-			  		$( "#slider-vertical_volume1" ).slider({
-				      orientation: "vertical",
-				      range: "min",
-				      min: 0,
-				      max: 100,
-				      value: 100,
-				      slide: function( event, ui ) {
-				        wavesurfer_tr1.setVolume(ui.value/100);
-				      }
-				    });
-				} );
+			  	$('#slider-vertical_volume1').slider({
+			  			orientation: "vertical",
+			  			min: 0,
+			  			max: 100,
+			  			value: 100,
+			  			slide: function( event, ui ) {
+			  				wavesurfer_tr1.setVolume(ui.value/100);
+			  			}
+			  		}).slider("pips", {
+			  			 first: "pip",
+			  			 last: "pip",
+			  			 step: "10"
+			  	    });
+			  
+		  		$( "#slider-vertical_volume2" ).slider({
+			  			orientation: "vertical",
+			  			min: 0,
+			  			max: 100,
+			  			value: 100,
+			  			slide: function( event, ui ) {
+			  				wavesurfer_tr2.setVolume(ui.value/100);
+			  			}
+			  		}).slider("pips", {
+			  			 rest: "label",
+			  			 step: "10"
+			  		});
 			  	
-			  	$( function() {
-			  		$( "#slider-vertical_volume2" ).slider({
-				      orientation: "vertical",
-				      range: "min",
-				      min: 0,
-				      max: 100,
-				      value: 100,
-				      slide: function( event, ui ) {
-				        wavesurfer_tr2.setVolume(ui.value/100);
-				      }
-				    });
-				} );
 			  	
-			  	$( function() {
-			  		$( "#slider-vertical_velocita1" ).slider({
+			  	$( "#slider-vertical_velocita1" ).slider({
 				      orientation: "vertical",
-				      range: "min",
 				      min: 0,
 				      max: 100,
 				      value: 50,
@@ -82,13 +82,13 @@
 				    	  else
 				    		wavesurfer_tr1.setPlaybackRate(ui.value/100);
 				      }
-				    });
-				} );
-			  	
-			  	$( function() {
-			  		$( "#slider-vertical_velocita2" ).slider({
+			  		}).slider("pips", {
+			  			 rest: "label",
+			  			 step: "10"
+			  		});	
+						  	
+			  	$( "#slider-vertical_velocita2" ).slider({
 				      orientation: "vertical",
-				      range: "min",
 				      min: 0,
 				      max: 100,
 				      value: 50,
@@ -98,13 +98,14 @@
 					    	  else
 					    		wavesurfer_tr2.setPlaybackRate(ui.value/100);
 				      }
-				    });
-				} );
+				  	}).slider("pips", {
+			  			 rest: "label",
+			  			 step: "10"
+			  		});
 			  	
 			  	$( function() {
-			    	$( ".slider-vertical" ).slider({
+			    	$( "#H_eq_tr1" ).slider({
 			    		orientation: "vertical",
-					    range: "min",
 					    min: 0,
 					    max: 100,
 					    value: 50,
@@ -112,26 +113,114 @@
 					    }
 			    	});
 			  	});
-			  				  	
-			  	function seektimeupdate(wavesurfer,id_elem_cur, id_elem_rim){ 
-			  		var currentTime_tr1 = wavesurfer.getCurrentTime();
-					var curtimetext = document.getElementById(id_elem_cur);
+			  	$( function() {
+			    	$( "#HM_eq_tr1" ).slider({
+			    		orientation: "vertical",
+					    min: 0,
+					    max: 100,
+					    value: 50,
+					    slide: function( event, ui ) {
+					    }
+			    	});
+			  	});
+			  	$( function() {
+			    	$( "#M_eq_tr1" ).slider({
+			    		orientation: "vertical",
+					    min: 0,
+					    max: 100,
+					    value: 50,
+					    slide: function( event, ui ) {
+					    }
+			    	});
+			  	});
+			  	$( function() {
+			    	$( "#LM_eq_tr1" ).slider({
+			    		orientation: "vertical",
+					    min: 0,
+					    max: 100,
+					    value: 50,
+					    slide: function( event, ui ) {
+					    }
+			    	});
+			  	});
+			  	$( function() {
+			    	$( "#L_eq_tr1" ).slider({
+			    		orientation: "vertical",
+					    min: 0,
+					    max: 100,
+					    value: 50,
+					    slide: function( event, ui ) {
+					    }
+			    	});
+			  	});
+			  	$( function() {
+			    	$( "#H_eq_tr2" ).slider({
+			    		orientation: "vertical",
+					    min: 0,
+					    max: 100,
+					    value: 50,
+					    slide: function( event, ui ) {
+					    }
+			    	});
+			  	});
+			  	$( function() {
+			    	$( "#HM_eq_tr2" ).slider({
+			    		orientation: "vertical",
+					    min: 0,
+					    max: 100,
+					    value: 50,
+					    slide: function( event, ui ) {
+					    }
+			    	});
+			  	});
+			  	$( function() {
+			    	$( "#M_eq_tr2" ).slider({
+			    		orientation: "vertical",
+					    min: 0,
+					    max: 100,
+					    value: 50,
+					    slide: function( event, ui ) {
+					    }
+			    	});
+			  	});
+			  	$( function() {
+			    	$( "#LM_eq_tr2" ).slider({
+			    		orientation: "vertical",
+					    min: 0,
+					    max: 100,
+					    value: 50,
+					    slide: function( event, ui ) {
+					    }
+			    	});
+			  	});
+			  	$( function() {
+			    	$( "#L_eq_tr2" ).slider({
+			    		orientation: "vertical",
+					    min: 0,
+					    max: 100,
+					    value: 50,
+					    slide: function( event, ui ) {
+					    }
+			    	});
+			  	});
+			  	
+			  	function seektimeupdate(wavesurfer,id_elem_rim, durata){ 
+			  		var currentTime = wavesurfer.getCurrentTime();
+			  		var s_rim = durata-currentTime; 
 					var rimtimetext = document.getElementById(id_elem_rim);
-					var curmins = Math.floor(currentTime_tr1/ 60);
-					var cursecs = Math.floor(currentTime_tr1 - curmins * 60);
-				    if(cursecs < 10){ cursecs = "0"+cursecs; }
-				    if(curmins < 10){ curmins = "0"+curmins; }
-					curtimetext.innerHTML = curmins+":"+cursecs;
-					rimtimetext.innerHTML = curmins+":"+cursecs;
+					var ri_mins = Math.floor(s_rim/ 60)%60;
+					var ri_secs = Math.floor(s_rim%60);
+				    if(ri_mins < 10){ ri_mins = "0"+ri_mins; }
+				    if(ri_secs < 10){ ri_secs = "0"+ri_secs; }
+					rimtimetext.innerHTML = ri_mins+":"+ri_secs;
 			  	}
 			  	
-			  	function durationupdate(wavesurfer,id_elem){
-			  		var durata_tr1 = wavesurfer.getDuration();
-					var durtimetext = document.getElementById(id_elem);
-					var durmins = Math.floor(durata_tr1 / 60);
-					var dursecs = Math.floor(durata_tr1 - durmins * 60);
-					var durmins = Math.floor(durata_tr1 / 60);
-					var dursecs = Math.floor(durata_tr1 - durmins * 60);
+			  	function durationupdate(wavesurfer,id_elem, durata){
+			  		var durtimetext = document.getElementById(id_elem);
+					var durmins = Math.floor(durata / 60);
+					var dursecs = Math.floor(durata - durmins * 60);
+					var durmins = Math.floor(durata / 60);
+					var dursecs = Math.floor(durata - durmins * 60);
 					if(dursecs < 10){ dursecs = "0"+dursecs; }
 					if(durmins < 10){ durmins = "0"+durmins; }
 					durtimetext.innerHTML = durmins+":"+dursecs;
@@ -229,11 +318,13 @@
 				        		    	curruent_audioURL = audioURL;
 				        		    	audioElm1.src = curruent_audioURL.replace('./jsdj/','./');
 				        		    	wavesurfer_tr1.load(audioElm1.src);
+				        		    	var duration;
 				    					wavesurfer_tr1.on('ready', function(){
-				    						durationupdate(wavesurfer_tr1,'min-tot-tr1');
+				    						duration=wavesurfer_tr1.getDuration();
+				    						durationupdate(wavesurfer_tr1,'min-tot-tr1', duration);
 				    					});
 				    					wavesurfer_tr1.on('audioprocess', function(){
-				    						seektimeupdate(wavesurfer_tr1,'min-att-tr1','min-rim-tr1');
+				    						seektimeupdate(wavesurfer_tr1,'min-rim-tr1', duration);
 				    					});
 				        		    	$('#titolo_dettaglio1').text(titolo);
 				        		    	$('#autore_dettaglio1').text(autore);
@@ -252,11 +343,13 @@
 				        		    	curruent_audioURL = audioURL;
 				        		    	audioElm2.src = curruent_audioURL.replace('./jsdj/','./');
 				        		    	wavesurfer_tr2.load(audioElm2.src);
+				        		    	var duration;
 				        		    	wavesurfer_tr2.on('ready', function(){
-				    						durationupdate(wavesurfer_tr2,'min-tot-tr2');
+				        		    		duration=wavesurfer_tr2.getDuration();
+				        		    		durationupdate(wavesurfer_tr2,'min-tot-tr2', duration);
 				    					});
 				    					wavesurfer_tr2.on('audioprocess', function(){
-				    						seektimeupdate(wavesurfer_tr2,'min-att-tr2','min-rim-tr2');
+				    						seektimeupdate(wavesurfer_tr2,'min-rim-tr2',duration);
 				    					});
 				        		    	$('#titolo_dettaglio2').text(titolo);
 				        		    	$('#autore_dettaglio2').text(autore);
@@ -306,12 +399,11 @@
 			function stop_track_2(){
 				wavesurfer_tr2.stop();
 			}
-			
-		    $(function() { 		    	
-		    	$(".dial").knob({
-		        	'change' : function(v) {
-		        	}
-		        });
+					    
+		    $(function() {
+			    $('#ctrl_tr1').fancyknob();
+			    
+			    $('#ctrl_tr2').fancyknob();
 		    });
 		    
 		    $( function() {
