@@ -186,6 +186,7 @@ $(document).ready( function() {
 				
   $( function() {
     	$( "#slider_automix" ).slider({
+    		animate:true,
     		min: 0,
     		max: 100,
     		value: 50,
@@ -204,6 +205,7 @@ $(document).ready( function() {
   	$('#slider-vertical_volume1').slider({
   			animate: true,
   			orientation: "vertical",
+  			range: "min",
   			min: 0,
   			max: 100,
   			value: 100,
@@ -212,15 +214,16 @@ $(document).ready( function() {
   					wavesurfer_tr1.setVolume(ui.value/100);
   			}
   		}).slider("pips", {
-  			 first: "pip",
-  			 last: "pip",
+  			 first: "pips",
+  			 last: "pips",
   			 step: "10"
   	    });
   
 	$( "#slider-vertical_volume2" ).slider({
 			animate: true,
 			orientation: "vertical",
-  			min: 0,
+			range: "min",
+			min: 0,
   			max: 100,
   			value: 100,
   			slide: function( event, ui ) {
@@ -228,8 +231,9 @@ $(document).ready( function() {
   					wavesurfer_tr2.setVolume(ui.value/100);
   			}
   		}).slider("pips", {
-  			 rest: "label",
-  			 step: "10"
+  			first: "pips",
+ 			last: "pips",
+ 			step: "10"
   		});
   	
   	
@@ -612,19 +616,36 @@ function cue_track2(){
 		cue_click2=1;
 	}
 }
-	
+
+var t;
+rotazione_img=0;
+function ruota_piastra(){
+	rotazione_img+=10;
+	$('#piastra1').attr('style', 'transform: rotate('+rotazione_img %360+'deg);');
+};
+function stop_rotazione(timer){
+	clearInterval(timer);
+}
 //PLAYPAUSE button track 1
 function playPause_track1(){
 	if(audio_focus == 0){
 		audio_focus = 1;
 		wavesurfer_tr1.playPause();
+		t = setInterval(ruota_piastra,30);
 	}else{
-		wavesurfer_tr1.playPause();
+		if(wavesurfer_tr1.isPlaying()){
+			clearInterval(t);
+			wavesurfer_tr1.playPause();
+		}else{
+			t = setInterval(ruota_piastra,30);
+			wavesurfer_tr1.playPause();
+		}
 	}
 }
 //STOP button track 1
 function stop_track1(){			
 	wavesurfer_tr1.stop();
+	clearInterval(t);
 }
 //PLAYPAUSE button track 2
 function playPause_track2(){

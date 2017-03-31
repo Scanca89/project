@@ -24,7 +24,7 @@ a{
 }
 
 canvas{
-	width:260px !important;
+	width:284px !important;
 	height:40px;
 }
 
@@ -209,9 +209,11 @@ h6 {
 	border: solid 1px #000 !important;
 }
 
-
 .ui-slider-vertical.ui-slider-pips{
 	margin-right: 0em !important; 
+}
+.ui-slider-vertical-pip{
+	margin-bottom:2px !important;
 }
 #slider-vertical_volume1 .ui-slider-line, #slider-vertical_volume2 .ui-slider-line{
 	background: -moz-linear-gradient(left,  #666 0%, #666 40%, #000 40%, #000 60%, #666 60%, #666 100%) !important;
@@ -224,9 +226,12 @@ h6 {
 #slider-vertical_volume1 .ui-slider-label, #slider-vertical_volume2 .ui-slider-label{
 	display: none !important;
 }
-#slider-vertical_volume1 .ui.slider-range{
-	color: red !important;
+#slider-vertical_volume1 .ui-slider-range{
+	background-color: rgba(220,41,30,0.3);
 }
+ #slider-vertical_volume2 .ui-slider-range{
+	background-color: rgba(16,72,200,0.3);
+ }
 
 #slider-vertical_velocita1 .ui-slider-line, #slider-vertical_velocita2 .ui-slider-line {
 	background: -moz-linear-gradient(left,  #666 0%, #666 40%, #000 40%, #000 60%, #666 60%, #666 100%) !important;
@@ -244,7 +249,6 @@ h6 {
 #slider-vertical_velocita1 .ui-slider-pip, #slider-vertical_velocita2 .ui-slider-pip{
 	text-align: right !important;
 }
-
 #slider-vertical_volume1, #slider-vertical_volume2 {
     height: 132px;
 	margin-top: 20px;
