@@ -31,6 +31,7 @@ $(document).ready( function() {
   	
   	$( function() {
     	$( "#H_eq_tr1" ).slider({
+    		animate: true,
     		orientation: "vertical",
 		    min: 0,
 		    max: 100,
@@ -42,6 +43,7 @@ $(document).ready( function() {
   	});
   	$( function() {
     	$( "#HM_eq_tr1" ).slider({
+    		animate: true,
     		orientation: "vertical",
 		    min: 0,
 		    max: 100,
@@ -53,6 +55,7 @@ $(document).ready( function() {
   	});
   	$( function() {
     	$( "#M_eq_tr1" ).slider({
+    		animate: true,
     		orientation: "vertical",
 		    min: 0,
 		    max: 100,
@@ -64,6 +67,7 @@ $(document).ready( function() {
   	});
   	$( function() {
     	$( "#LM_eq_tr1" ).slider({
+    		animate: true,
     		orientation: "vertical",
 		    min: 0,
 		    max: 100,
@@ -75,6 +79,7 @@ $(document).ready( function() {
   	});
   	$( function() {
     	$( "#L_eq_tr1" ).slider({
+    		animate: true,
     		orientation: "vertical",
 		    min: 0,
 		    max: 100,
@@ -86,6 +91,7 @@ $(document).ready( function() {
   	});
   	$( function() {
     	$( "#H_eq_tr2" ).slider({
+    		animate: true,
     		orientation: "vertical",
 		    min: 0,
 		    max: 100,
@@ -97,6 +103,7 @@ $(document).ready( function() {
   	});
   	$( function() {
     	$( "#HM_eq_tr2" ).slider({
+    		animate: true,
     		orientation: "vertical",
 		    min: 0,
 		    max: 100,
@@ -108,6 +115,7 @@ $(document).ready( function() {
   	});
   	$( function() {
     	$( "#M_eq_tr2" ).slider({
+    		animate: true,
     		orientation: "vertical",
 		    min: 0,
 		    max: 100,
@@ -119,6 +127,7 @@ $(document).ready( function() {
   	});
   	$( function() {
     	$( "#LM_eq_tr2" ).slider({
+    		animate: true,
     		orientation: "vertical",
 		    min: 0,
 		    max: 100,
@@ -130,6 +139,7 @@ $(document).ready( function() {
   	});
   	$( function() {
     	$( "#L_eq_tr2" ).slider({
+    		animate: true,
     		orientation: "vertical",
 		    min: 0,
 		    max: 100,
@@ -192,6 +202,7 @@ $(document).ready( function() {
   	} );
   
   	$('#slider-vertical_volume1').slider({
+  			animate: true,
   			orientation: "vertical",
   			min: 0,
   			max: 100,
@@ -207,7 +218,8 @@ $(document).ready( function() {
   	    });
   
 	$( "#slider-vertical_volume2" ).slider({
-  			orientation: "vertical",
+			animate: true,
+			orientation: "vertical",
   			min: 0,
   			max: 100,
   			value: 100,
@@ -222,11 +234,12 @@ $(document).ready( function() {
   	
   	
   	$( "#slider-vertical_velocita1" ).slider({
-	      orientation: "vertical",
-	      min: 0,
-	      max: 100,
-	      value: 50,
-	      slide: function( event, ui ) {
+  			animate: true,
+  			orientation: "vertical",
+		    min: 0,
+		    max: 100,
+		    value: 50,
+		    slide: function( event, ui ) {
 	    	  if(ui.value > 50)
 	    	  	wavesurfer_tr1.setPlaybackRate((ui.value/100)*2);
 	    	  else
@@ -238,6 +251,7 @@ $(document).ready( function() {
   		});	
 			  	
   	$( "#slider-vertical_velocita2" ).slider({
+	      animate: true,
 	      orientation: "vertical",
 	      min: 0,
 	      max: 100,
@@ -348,6 +362,12 @@ $(document).ready( function() {
 							var table = document.getElementById('tabPlayList');
 							var tbody = table.getElementsByTagName('tbody')[0];
 							var tr = document.createElement('tr');
+							tr.draggable({
+								revert: "invalid", 
+			        			helper: 'clone',
+			        			scroll: false,
+			        			cursor: 'move',
+							});
 							var tags = [titolo,autore,album,anno,genere];									
 							for(var i=0; i<5; i++){
 								var td = document.createElement('td');
@@ -355,7 +375,7 @@ $(document).ready( function() {
 								td.appendChild(node);
 								tr.appendChild(td);
 							}
-							tbody.appendChild(tr);									
+							tbody.appendChild(tr);
 			           	}
 	        		});
 	        		$('#piastra1').droppable({

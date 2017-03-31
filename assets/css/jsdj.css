@@ -82,20 +82,20 @@ h6 {
 }
 
 #min-tot-tr1{
-	margin-top:45px;
-	margin-left:10px;
+	margin-top:15px;
+	margin-left:15px;
 	font-size: 20px !important;
 }
 #min-tot-tr2{
-	margin-top:45px;
-	margin-right:10px;
+	margin-top:15px;
+	margin-right:15px;
 	font-size: 20px !important;
 }
 #min-rim-tr1{
-	margin-left:10px;
+	margin-left:15px;
 }
 #min-rim-tr2{
-	margin-right:10px;
+	margin-right:15px;
 }
 
 .my-btn{
@@ -136,6 +136,14 @@ h6 {
 #button_in1, #button_out1, #button_in2, #button_out2{
 	width: 55px !important;
 	height: 30px !important;
+}
+
+#control_audio1, #effects_tr1{
+	left:12px;
+}
+
+#control_audio2, #effects_tr2{
+	right:12px;
 }
 
 .btn-eq1,.btn-eq2{
@@ -200,6 +208,8 @@ h6 {
 	margin-bottom: -10px !important;
 	border: solid 1px #000 !important;
 }
+
+
 .ui-slider-vertical.ui-slider-pips{
 	margin-right: 0em !important; 
 }
@@ -213,6 +223,9 @@ h6 {
 }
 #slider-vertical_volume1 .ui-slider-label, #slider-vertical_volume2 .ui-slider-label{
 	display: none !important;
+}
+#slider-vertical_volume1 .ui.slider-range{
+	color: red !important;
 }
 
 #slider-vertical_velocita1 .ui-slider-line, #slider-vertical_velocita2 .ui-slider-line {
@@ -243,6 +256,7 @@ h6 {
 }
 
 #slider_automix{
+	width:160px;
 	height:4px !important;
 	background:#000 !important;
 	border:#000 !important;
@@ -283,25 +297,27 @@ h6 {
  	height:300px;
 }
 
+#pista_traccia1, #pista_traccia2{
+	padding: 10px 0px 5px 0px !important;
+}
+
 #piastra1{
-	margin-top: 10px;
-	margin-left: 0px;
-	margin-bottom: 5px;
+	position:absolute;
+	left: 47px;
 }
 #puntina1{
 	position:absolute;
-	right: 5px;
-	transform:rotate(10deg);
+	right: -47px;
+	transform:rotate(15deg);
 }
 #piastra2{
-	margin-top: 10px;
-	margin-right: 0px;
-	margin-bottom: 5px;
+	position:absolute;
+	right: 45px;
 }
 #puntina2{
 	position:absolute;
-	left: 160px;
-	transform:rotate(10deg);
+	left: 130px;
+	transform:rotate(15deg);
 }
 
 .knob-surround{
@@ -323,19 +339,20 @@ h6 {
 
 .min{
  	height:80px;
+	padding: 2px 2px 2px 2px;
 }
 
-#min-tot1, #min-rim1, #bpm1, #rigavuota1{
-	border-right: solid 2px #262424;
+#rigavolume1{
+	/*border-right: solid 2px #262424;*/
 }
 
 .automix{
  	height:60px;
-	margin-top: 6px !important;
+	left:25px;
 }
 
 .min-att{
- 	height:100px;
+ 	height:220px;
 }
 
 .bpm{
@@ -350,11 +367,38 @@ h6 {
 	padding-left: 15px;
 	padding-right: 15px;
 }
+#dis_tr1{
+	padding-left: 0px !important;
+}
+#dis_tr2{
+	padding-right: 0px !important;
+}
 #titolo_tr1, #titolo_tr2{
+	background-color:#282828;
+	box-shadow: 1px 1px 0px 0px #262424;
+}
+#titolo_tr1{
 	padding-left: 10px;
+	padding-right: 5px;
+	margin-right:-15px !important;	
+	border-right: solid 1px #1e1e1e;
+}
+#titolo_tr2{
+	padding-right: 10px;
+	padding-left: 5px;
+	margin-left:-15px !important;
+	border-left: solid 1px #1e1e1e;
+}
+#min-tot1{
 	padding-right: 10px;
 	background-color:#282828;
-	box-shadow: 1px 1px #262424;	
+	box-shadow: 1px 1px 0px 0px #262424 !important;
+}
+#min-tot2{
+	background-color:#282828;
+	padding-left: 10px;
+	margin-left: 15px;
+	box-shadow: 0px 1px 0px 0px #262424 !important;
 }
 
 #progress-bar1, #progress-bar2 {

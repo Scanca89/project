@@ -144,9 +144,9 @@
 	         		</div>
 	         	</div>
 	        </div>
-         	<div class = "row" id="pista_traccia1">
+         	<div class = "row">
          		<div class="col-md-12 col-sm-12 col-xs-12 pista">
-         			<div class = "row" align="center">
+         			<div class = "row"  id="pista_traccia1" align="center">
          				<div class="col-md-2 col-sm-2 col-xs-2">
          					<div class="slider-vertical" id="slider-vertical_velocita1"></div>
          				</div>
@@ -155,14 +155,11 @@
          					<img src="assets/images/table_tonearm.png" id="puntina1" width="45" height="156"></img>
          					<audio id="audio1"></audio>
          				</div>
-         				<div class="col-md-2 col-sm-2 col-xs-2">
-         					<div class="slider-vertical" id="slider-vertical_volume1"></div>
-         					<input id="ctrl_tr1" class="inp" type="range" min="0" max="100" value="0">
-         				</div>
+         				<div class="col-md-2 col-sm-2 col-xs-2"></div>
          			</div>
          			<div class = "row">
-         				<div class="col-md-1 col-sm-1 col-xs-1"></div>
-         				<div class="col-md-9 col-sm-9 col-xs-9" align="right">
+         				<div class="col-md-2 col-sm-2 col-xs-2"></div>
+         				<div class="col-md-9 col-sm-9 col-xs-9" id="control_audio1" align="right">
          					<button class="btn btn-primary my-btn" id="button_cue1" onclick="cue_track1()"><h2>CUE</h2></button>
          					<button class="btn btn-primary my-btn" id="button_play1" onclick="playPause_track1()">
          						<i class="fa fa-play" aria-hidden="true"></i>
@@ -173,18 +170,18 @@
          					</button>
          					<button class="btn btn-primary my-btn" id="button_sync1" onclick="sync_track1()"><h2>SYNC</h2></button>
          				</div>
-         				<div class="col-md-2 col-sm-2 col-xs-2" align="center">
+         				<div class="col-md-1 col-sm-1 col-xs-1" align="center">
          				</div>
          			</div>
          			<div class = "row">
-         				<div class="col-md-1 col-sm-1 col-xs-1"></div>
+         				<div class="col-md-2 col-sm-2 col-xs-2"></div>
          				<div class="col-md-9 col-sm-9 col-xs-9" id="effects_tr1" style="margin-top: 10px;" align="right">
          					<button class="btn btn-primary my-btn" id="button_echo1"><h2>ECHO</h2></button>
          					<button class="btn btn-primary my-btn" id="button_flanger1"><h2>PHASE</h2></button>
          					<button class="btn btn-primary my-btn" id="button_flanger1"><h2>CHORUS</h2></button>
          					<button class="btn btn-primary my-btn" id="button_brake1"><h2>BRAKE</h2></button>
          				</div>
-         				<div class="col-md-2 col-sm-2 col-xs-2"></div>
+         				<div class="col-md-1 col-sm-1 col-xs-1"></div>
          			</div>
  				</div>
          	</div>
@@ -192,30 +189,31 @@
         
         <div class="col-md-2 col-sm-2 col-xs-2"> 
          	<div class = "row" id="dettaglio_minutaggio_totale">
-         		<div class="col-md-6 col-sm-6 col-xs-6 min" id="min-tot1">    			
-         			<h6 id="min-tot-tr1">00:00</h6>
+         		<div class="display" id="dis_tr1">	
+	         		<div class="col-md-6 col-sm-6 col-xs-6 min" id="min-tot1">    			
+	         			<h6 id="min-tot-tr1">00:00</h6>
+	         			<h6 id="min-rim-tr1">00:00</h6>
+	         		</div>
+	         	</div>
+	         	<div class="display" id="dis_tr2">	
+	         		<div class="col-md-6 col-sm-6 col-xs-6 min" id="min-tot2" align="right">
+	         			<h6 id="min-tot-tr2">00:00</h6>
+	         			<h6 id="min-rim-tr2">00:00</h6>
+	         		</div>
+	         	</div>
+         	</div>
+         	<div class="row" id="riga_volume">
+         		<div class="col-md-6 col-sm-6 col-xs-6 min-att" id="rigavolume1" align="center">
+         			<div class=slider-vertical id="slider-vertical_volume1"></div>
+         			<input id="ctrl_tr1" class="inp" type="range" min="0" max="100" value="0">
          		</div>
-         		<div class="col-md-6 col-sm-6 col-xs-6 min" id="min-tot2" align="right">
-         			<h6 id="min-tot-tr2">00:00</h6>
+         		<div class="col-md-6 col-sm-6 col-xs-6 min-att" id="rigavolume2" align="center">
+         			<div class=slider-vertical id="slider-vertical_volume2"></div>
+         			<input id="ctrl_tr2" class="inp" type="range" min="0" max="100" value="0">
          		</div>
          	</div>
-         	<div class = "row" id="dettaglio_minutaggio_rimanete">
-         		<div class="col-md-6 col-sm-6 col-xs-6 min" id="min-rim1">
-         			<h6 id="min-rim-tr1">00:00</h6>
-         		</div>
-         		<div class="col-md-6 col-sm-6 col-xs-6 min" id="min-rim2" align="right">
-         			<h6 id="min-rim-tr2">00:00</h6>
-         		</div>
-         	</div>
+         	
          	<div class = "row">
-         		<div class="col-md-6 col-sm-6 col-xs-6 bpm" id="bpm1"></div>
-         		<div class="col-md-6 col-sm-6 col-xs-6 bpm" id="bpm2"></div>
-         	</div>
-         	<div class = "row">
-         		<div class="col-md-6 col-sm-6 col-xs-6 min" id="rigavuota1"></div>
-         		<div class="col-md-6 col-sm-6 col-xs-6 min" id="rigavuota2"></div>
-         	</div>
-         	<div class = "row" id="automix">
        			<div class="col-md-12 col-sm-12 col-xs-12 automix">
        				<div class="slider-horizontal" id="slider_automix"></div>
        			</div>
@@ -235,13 +233,10 @@
 	         		</div>
 	         	</div>
 	        </div>
-         	<div class = "row" id="pista_traccia2">
+         	<div class = "row">
         			<div class="col-md-12 col-sm-12 col-xs-12 pista">
-         			<div class = "row" align="center">
-         				<div class="col-md-2 col-sm-2 col-xs-2">
-         					<div class=slider-vertical id="slider-vertical_volume2"></div>
-         					<input id="ctrl_tr2" class="inp" type="range" min="0" max="100" value="0">
-         				</div>
+         			<div class = "row" id="pista_traccia2" align="center">
+         				<div class="col-md-2 col-sm-2 col-xs-2"></div>
          				<div class="col-md-8 col-sm-8 col-xs-8">
          					<img src="assets/images/piastra.png" id="piastra2" width="200" style="background:url(./covers/image.png) center no-repeat;"></img>
          					<img src="assets/images/table_tonearm.png" id="puntina2" width="45" height="156"></img>
@@ -253,7 +248,7 @@
          			</div>
          			<div class = "row" align="center">
          				<div class="col-md-1 col-sm-1 col-xs-1"></div>
-         				<div class="col-md-9 col-sm-9 col-xs-9" align="right">
+         				<div class="col-md-9 col-sm-9 col-xs-9" align="left" id="control_audio2">
          					<button class="btn btn-primary my-btn" id="button_cue2" onclick="cue_track2()"><h2>CUE</h2></button>
          					<button class="btn btn-primary my-btn" id="button_play2" onclick="playPause_track2()">
          						<i class="fa fa-play" aria-hidden="true"></i>
@@ -268,7 +263,7 @@
          			</div>
          			<div class = "row">
          				<div class="col-md-1 col-sm-1 col-xs-1"></div>
-         				<div class="col-md-9 col-sm-9 col-xs-9" id="effects_tr2" style="margin-top: 10px;" align="right">
+         				<div class="col-md-9 col-sm-9 col-xs-9" id="effects_tr2" style="margin-top: 10px;" align="left">
          					<button class="btn btn-primary my-btn" id="button_echo2"><h2>ECHO</h2></button>
          					<button class="btn btn-primary my-btn" id="button_flanger2"><h2>PHASE</h2></button>
          					<button class="btn btn-primary my-btn" id="button_chorus2"><h2>CHORUS</h2></button>
