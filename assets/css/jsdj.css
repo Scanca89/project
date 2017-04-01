@@ -304,23 +304,24 @@ h6 {
 #pista_traccia1, #pista_traccia2{
 	padding: 10px 0px 5px 0px !important;
 }
-
-#piastra1{
-	position:absolute;
-	left: 47px;
+#pista1{
+	margin-left:47px;
+	background-position:50px 50% !important;
+}
+#pista2{
+	margin-right:45px;
+	background-position:50px 50% !important;
 }
 #puntina1{
 	position:absolute;
 	right: -47px;
+	margin-top:-200px;
 	transform:rotate(15deg);
-}
-#piastra2{
-	position:absolute;
-	right: 45px;
 }
 #puntina2{
 	position:absolute;
 	left: 130px;
+	margin-top:-200px;
 	transform:rotate(15deg);
 }
 

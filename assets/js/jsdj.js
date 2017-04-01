@@ -389,7 +389,7 @@ $(document).ready( function() {
 	        		    drop: function(event,ui) {
 	        		    	var url =src.split(' ').join("_");
 	        		    	var urlString = "url(./" + url + ")";
-	        		    	document.getElementById("piastra1").style.backgroundImage = urlString;
+	        		    	document.getElementById("pista1").style.backgroundImage = urlString;
 	        		    	audioElm1 = document.getElementById("audio1");
 	        		    	curruent_audioURL = audioURL;
 	        		    	audioElm1.src = curruent_audioURL.replace('./jsdj/','./');
@@ -425,7 +425,7 @@ $(document).ready( function() {
 	        		    drop: function(event,ui) {
 	        		    	var url =src.split(' ').join("_");				        		    	
 	        		    	var urlString = "url(./" + url + ")";
-	        		    	document.getElementById("piastra2").style.backgroundImage = urlString;
+	        		    	document.getElementById("pista2").style.backgroundImage = urlString;
 	        		    	audioElm2 = document.getElementById("audio2");
 	        		    	curruent_audioURL = audioURL;
 	        		    	audioElm2.src = curruent_audioURL.replace('./jsdj/','./');
@@ -647,18 +647,33 @@ function stop_track1(){
 	wavesurfer_tr1.stop();
 	clearInterval(t);
 }
+
+var t2;
+rotazione_img2=0;
+function ruota_piastra2(){
+	rotazione_img2+=10;
+	$('#piastra2').attr('style', 'transform: rotate('+rotazione_img2 %360+'deg);');
+};
 //PLAYPAUSE button track 2
 function playPause_track2(){
 	if(audio_focus == 0){
 		audio_focus = 2;
 		wavesurfer_tr2.playPause();
+		t2 = setInterval(ruota_piastra2,30);
 	}else{
-		wavesurfer_tr2.playPause();
+		if(wavesurfer_tr2.isPlaying()){
+			clearInterval(t2);
+			wavesurfer_tr2.playPause();
+		}else{
+			t = setInterval(ruota_piastra2,30);
+			wavesurfer_tr2.playPause();
+		}
 	}
 }
 //STOP button track 2
 function stop_track2(){
 	wavesurfer_tr2.stop();
+	clearInterval(t2);
 }
 //SYNC button track 1
 function sync_track1(){
