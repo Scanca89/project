@@ -60,10 +60,16 @@ h5 {
 #titolo_dettaglio1{
 	margin: 10px 0px 0px 0px !important;
 	height:18px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
 }
 #titolo_dettaglio2{
 	margin: 10px 0px 0px 0px !important;
 	height:18px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
 }
 
 #autore_dettaglio1{
@@ -227,10 +233,12 @@ h6 {
 	display: none !important;
 }
 #slider-vertical_volume1 .ui-slider-range{
-	background-color: rgba(220,41,30,0.3);
+	background-color: rgba(220,41,30,0.8);
+	border: solid 1px #000;
 }
  #slider-vertical_volume2 .ui-slider-range{
-	background-color: rgba(16,72,200,0.3);
+	background-color: rgba(32,211,32,0.8);
+	border: solid 1px #000;
  }
 
 #slider-vertical_velocita1 .ui-slider-line, #slider-vertical_velocita2 .ui-slider-line {
@@ -241,7 +249,7 @@ h6 {
 	margin-left: 0 !important;
 }
 #slider-vertical_velocita1 .ui-slider-label{
-	left: -13px !important;
+	left: -8px !important;
 }
 #slider-vertical_velocita2 .ui-slider-label{
 	left: -50px !important;
@@ -304,24 +312,23 @@ h6 {
 #pista_traccia1, #pista_traccia2{
 	padding: 10px 0px 5px 0px !important;
 }
-#pista1{
-	margin-left:47px;
-	background-position:50px 50% !important;
+#piastra1{
+	position:absolute;
+	left:47px;
 }
-#pista2{
+#piastra2{
+	position:absolute;
+	right:5px;
 	margin-right:45px;
-	background-position:50px 50% !important;
 }
 #puntina1{
 	position:absolute;
 	right: -47px;
-	margin-top:-200px;
 	transform:rotate(15deg);
 }
 #puntina2{
 	position:absolute;
 	left: 130px;
-	margin-top:-200px;
 	transform:rotate(15deg);
 }
 
@@ -381,6 +388,7 @@ h6 {
 #titolo_tr1, #titolo_tr2{
 	background-color:#282828;
 	box-shadow: 1px 1px 0px 0px #262424;
+	text-overflow: ellipsis;
 }
 #titolo_tr1{
 	padding-left: 10px;
@@ -418,7 +426,7 @@ h6 {
 	background-color:#d60000 !important;
 }
 .progress-bar-success{
-	background-color:#1048c8 !important;
+	background-color:#20d320 !important;
 }
 
 .row{
@@ -494,5 +502,6 @@ table{
 }
 
 #spinner_tr1, #spinner_tr2 {
+	width: 110px;
 	margin: auto !important;
 }

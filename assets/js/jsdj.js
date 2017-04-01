@@ -4,6 +4,8 @@ var audioElm2;
 var wavesurfer_tr2
 var audioURL;
 var audio_focus = 0;
+var init1=0;
+var init2=0;
 		
 function setTagsScheda(name,tags){
 	var scheda_id = "#scheda_" + name;				
@@ -14,6 +16,9 @@ function setTagsScheda(name,tags){
 }
 
 $(document).ready( function() {
+	
+	$("#i-pause1").hide();
+	$("#i-pause2").hide();
 					
 	wavesurfer_tr1 = WaveSurfer.create({
 		container: '#waveform_traccia1',
@@ -24,8 +29,8 @@ $(document).ready( function() {
 	
 	wavesurfer_tr2 = WaveSurfer.create({
 		container: '#waveform_traccia2',
-		waveColor: '#1048c8',
-		progressColor: 'darkblue',
+		waveColor: '#20d320',
+		progressColor: 'darkgreen',
 		height: '40'
 	});
   	
@@ -214,8 +219,8 @@ $(document).ready( function() {
   					wavesurfer_tr1.setVolume(ui.value/100);
   			}
   		}).slider("pips", {
-  			 first: "pips",
-  			 last: "pips",
+  			 first: false,
+  			 last: false,
   			 step: "10"
   	    });
   
@@ -231,8 +236,8 @@ $(document).ready( function() {
   					wavesurfer_tr2.setVolume(ui.value/100);
   			}
   		}).slider("pips", {
-  			first: "pips",
- 			last: "pips",
+  			first: false,
+ 			last: false,
  			step: "10"
   		});
   	
@@ -240,12 +245,12 @@ $(document).ready( function() {
   	$( "#slider-vertical_velocita1" ).slider({
   			animate: true,
   			orientation: "vertical",
-		    min: 0,
-		    max: 100,
-		    value: 50,
+		    min: -50,
+		    max: 50,
+		    value: 0,
 		    slide: function( event, ui ) {
-	    	  if(ui.value > 50)
-	    	  	wavesurfer_tr1.setPlaybackRate((ui.value/100)*2);
+		      if(ui.value >=0)
+	    	  	wavesurfer_tr1.setPlaybackRate((ui.value/100)+1);
 	    	  else
 	    		wavesurfer_tr1.setPlaybackRate(ui.value/100);
 	      }
@@ -257,14 +262,15 @@ $(document).ready( function() {
   	$( "#slider-vertical_velocita2" ).slider({
 	      animate: true,
 	      orientation: "vertical",
-	      min: 0,
-	      max: 100,
-	      value: 50,
+	      min: -50,
+	      max: 50,
+	      value: 0,
 	      slide: function( event, ui ) {
-	    	  if(ui.value > 50)
-		    	  	wavesurfer_tr2.setPlaybackRate((ui.value/100)*2);
-		    	  else
-		    		wavesurfer_tr2.setPlaybackRate(ui.value/100);
+	    	  if(ui.value >= 0){
+		    	  wavesurfer_tr2.setPlaybackRate((ui.value/100)+1);
+	    	  }else{
+	    		  wavesurfer_tr2.setPlaybackRate(Math.abs(ui.value/100));
+	    	  }
 	      }
 	  	}).slider("pips", {
   			 rest: "label",
@@ -366,12 +372,6 @@ $(document).ready( function() {
 							var table = document.getElementById('tabPlayList');
 							var tbody = table.getElementsByTagName('tbody')[0];
 							var tr = document.createElement('tr');
-							tr.draggable({
-								revert: "invalid", 
-			        			helper: 'clone',
-			        			scroll: false,
-			        			cursor: 'move',
-							});
 							var tags = [titolo,autore,album,anno,genere];									
 							for(var i=0; i<5; i++){
 								var td = document.createElement('td');
@@ -383,13 +383,10 @@ $(document).ready( function() {
 			           	}
 	        		});
 	        		$('#piastra1').droppable({
-	        			classes: {
-	        		      	"ui-droppable-active": "ui-state-highlight"
-	        		    },
 	        		    drop: function(event,ui) {
 	        		    	var url =src.split(' ').join("_");
 	        		    	var urlString = "url(./" + url + ")";
-	        		    	document.getElementById("pista1").style.backgroundImage = urlString;
+	        		    	document.getElementById("piastra1").style.backgroundImage = urlString;
 	        		    	audioElm1 = document.getElementById("audio1");
 	        		    	curruent_audioURL = audioURL;
 	        		    	audioElm1.src = curruent_audioURL.replace('./jsdj/','./');
@@ -397,6 +394,7 @@ $(document).ready( function() {
 	        		    	var duration;
 	        		    	wavesurfer_tr1.on('loading', showProgress_1);
 	    					wavesurfer_tr1.on('ready', function(){
+	    						init1=1;
 	    						hideProgress_1();
 	    						duration=wavesurfer_tr1.getDuration();
 	    						durationupdate(wavesurfer_tr1,'min-tot-tr1', duration);
@@ -419,13 +417,10 @@ $(document).ready( function() {
 	                     }
 	        		})
 	        		$('#piastra2').droppable({
-	        			classes: {
-	        		      "ui-droppable-active": "ui-state-highlight"
-	        		    },
 	        		    drop: function(event,ui) {
 	        		    	var url =src.split(' ').join("_");				        		    	
 	        		    	var urlString = "url(./" + url + ")";
-	        		    	document.getElementById("pista2").style.backgroundImage = urlString;
+	        		    	document.getElementById("piastra2").style.backgroundImage = urlString;
 	        		    	audioElm2 = document.getElementById("audio2");
 	        		    	curruent_audioURL = audioURL;
 	        		    	audioElm2.src = curruent_audioURL.replace('./jsdj/','./');
@@ -433,6 +428,7 @@ $(document).ready( function() {
 	        		    	var duration;
 	        		    	wavesurfer_tr2.on('loading', showProgress_2);
 	        		    	wavesurfer_tr2.on('ready', function(){
+	        		    		init2=1;
 	        		    		hideProgress_2();
 	        		    		duration=wavesurfer_tr2.getDuration();
 	        		    		durationupdate(wavesurfer_tr2,'min-tot-tr2', duration);
@@ -617,63 +613,86 @@ function cue_track2(){
 	}
 }
 
-var t;
-rotazione_img=0;
-function ruota_piastra(){
-	rotazione_img+=10;
-	$('#piastra1').attr('style', 'transform: rotate('+rotazione_img %360+'deg);');
-};
+var deg1 = 0;
+function rotate_my_big_ass_gear1() {
+    $('#piastra1').css({
+        'transform': 'rotate(' + (deg1+=1) + 'deg)',
+    });
+}
 function stop_rotazione(timer){
 	clearInterval(timer);
 }
+
+var t1;
 //PLAYPAUSE button track 1
 function playPause_track1(){
-	if(audio_focus == 0){
-		audio_focus = 1;
-		wavesurfer_tr1.playPause();
-		t = setInterval(ruota_piastra,30);
-	}else{
-		if(wavesurfer_tr1.isPlaying()){
-			clearInterval(t);
+	if(init1==1){
+		if(audio_focus == 0){
+			audio_focus = 1;
+			$("#i-play1").hide();
+			$("#i-pause1").show();
 			wavesurfer_tr1.playPause();
+			t1 = window.setInterval(rotate_my_big_ass_gear1, 30);
 		}else{
-			t = setInterval(ruota_piastra,30);
-			wavesurfer_tr1.playPause();
+			if(wavesurfer_tr1.isPlaying()){
+				$("#i-play1").show();
+				$("#i-pause1").hide();
+				clearInterval(t1);
+				wavesurfer_tr1.playPause();
+			}else{
+				$("#i-play1").hide();
+				$("#i-pause1").show();
+				wavesurfer_tr1.playPause();
+				t1 = window.setInterval(rotate_my_big_ass_gear1, 30);
+			}
 		}
 	}
 }
 //STOP button track 1
-function stop_track1(){			
+function stop_track1(){
+	$("#i-pause1").hide();
+	$("#i-play1").show();
+	clearInterval(t1);
 	wavesurfer_tr1.stop();
-	clearInterval(t);
 }
 
+var deg2 = 0;
+function rotate_my_big_ass_gear2() {
+    $('#piastra2').css({
+        'transform': 'rotate(' + (deg2+=1) + 'deg)',
+    });
+}
 var t2;
-rotazione_img2=0;
-function ruota_piastra2(){
-	rotazione_img2+=10;
-	$('#piastra2').attr('style', 'transform: rotate('+rotazione_img2 %360+'deg);');
-};
 //PLAYPAUSE button track 2
 function playPause_track2(){
-	if(audio_focus == 0){
-		audio_focus = 2;
-		wavesurfer_tr2.playPause();
-		t2 = setInterval(ruota_piastra2,30);
-	}else{
-		if(wavesurfer_tr2.isPlaying()){
-			clearInterval(t2);
+	if(init2==1){
+		if(audio_focus == 0){
+			audio_focus = 2;
+			$("#i-play2").hide();
+			$("#i-pause2").show();
 			wavesurfer_tr2.playPause();
+			t2 = window.setInterval(rotate_my_big_ass_gear2, 30);
 		}else{
-			t = setInterval(ruota_piastra2,30);
-			wavesurfer_tr2.playPause();
+			if(wavesurfer_tr2.isPlaying()){
+				$("#i-play2").show();
+				$("#i-pause2").hide();
+				clearInterval(t2);
+				t2=wavesurfer_tr2.playPause();
+			}else{
+				$("#i-play2").hide();
+				$("#i-pause2").show();
+				wavesurfer_tr2.playPause();
+				t2 = window.setInterval(rotate_my_big_ass_gear2, 30);
+			}
 		}
 	}
 }
 //STOP button track 2
 function stop_track2(){
-	wavesurfer_tr2.stop();
+	$("#i-pause2").hide();
+	$("#i-play2").show();
 	clearInterval(t2);
+	wavesurfer_tr2.stop();
 }
 //SYNC button track 1
 function sync_track1(){
