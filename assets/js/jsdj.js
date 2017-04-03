@@ -6,6 +6,8 @@ var audioURL;
 var audio_focus = 0;
 var init1=0;
 var init2=0;
+var dag_tr1=10;
+var dag_tr2=10;
 		
 function setTagsScheda(name,tags){
 	var scheda_id = "#scheda_" + name;				
@@ -19,7 +21,7 @@ $(document).ready( function() {
 	
 	$("#i-pause1").hide();
 	$("#i-pause2").hide();
-					
+						
 	wavesurfer_tr1 = WaveSurfer.create({
 		container: '#waveform_traccia1',
 		waveColor: '#d60000',
@@ -44,7 +46,11 @@ $(document).ready( function() {
 		    slide: function( event, ui ) {
 		    	eq_custom_tr1[0] = ui.value;
 		    }
-    	});
+    	}).slider("pips", {
+  			 first: false,
+  			 last: false,
+  			 step: "17"
+  	    });
   	});
   	$( function() {
     	$( "#HM_eq_tr1" ).slider({
@@ -56,7 +62,11 @@ $(document).ready( function() {
 		    slide: function( event, ui ) {
 		    	eq_custom_tr1[1] = ui.value;
 		    }
-    	});
+    	}).slider("pips", {
+  			 first: false,
+  			 last: false,
+  			 step: "17"
+  	    });
   	});
   	$( function() {
     	$( "#M_eq_tr1" ).slider({
@@ -68,7 +78,11 @@ $(document).ready( function() {
 		    slide: function( event, ui ) {
 		    	eq_custom_tr1[2] = ui.value;
 		    }
-    	});
+    	}).slider("pips", {
+  			 first: false,
+  			 last: false,
+  			 step: "17"
+  	    });
   	});
   	$( function() {
     	$( "#LM_eq_tr1" ).slider({
@@ -80,7 +94,11 @@ $(document).ready( function() {
 		    slide: function( event, ui ) {
 		    	eq_custom_tr1[3] = ui.value;
 		    }
-    	});
+    	}).slider("pips", {
+  			 first: false,
+  			 last: false,
+  			 step: "17"
+  	    });
   	});
   	$( function() {
     	$( "#L_eq_tr1" ).slider({
@@ -92,7 +110,11 @@ $(document).ready( function() {
 		    slide: function( event, ui ) {
 		    	eq_custom_tr1[4] = ui.value;
 		    }
-    	});
+    	}).slider("pips", {
+  			 first: false,
+  			 last: false,
+  			 step: "17"
+  	    });
   	});
   	$( function() {
     	$( "#H_eq_tr2" ).slider({
@@ -104,7 +126,11 @@ $(document).ready( function() {
 		    slide: function( event, ui ) {
 		    	eq_custom_tr2[0] = ui.value;
 		    }
-    	});
+    	}).slider("pips", {
+  			 first: false,
+  			 last: false,
+  			 step: "17"
+  	    });
   	});
   	$( function() {
     	$( "#HM_eq_tr2" ).slider({
@@ -116,7 +142,11 @@ $(document).ready( function() {
 		    slide: function( event, ui ) {
 		    	eq_custom_tr2[1] = ui.value;
 		    }
-    	});
+    	}).slider("pips", {
+  			 first: false,
+  			 last: false,
+  			 step: "17"
+  	    });
   	});
   	$( function() {
     	$( "#M_eq_tr2" ).slider({
@@ -128,7 +158,11 @@ $(document).ready( function() {
 		    slide: function( event, ui ) {
 		    	eq_custom_tr2[2] = ui.value;
 		    }
-    	});
+    	}).slider("pips", {
+  			 first: false,
+  			 last: false,
+  			 step: "17"
+  	    });
   	});
   	$( function() {
     	$( "#LM_eq_tr2" ).slider({
@@ -140,7 +174,11 @@ $(document).ready( function() {
 		    slide: function( event, ui ) {
 		    	eq_custom_tr2[3] = ui.value;
 		    }
-    	});
+    	}).slider("pips", {
+  			 first: false,
+  			 last: false,
+  			 step: "17"
+  	    });
   	});
   	$( function() {
     	$( "#L_eq_tr2" ).slider({
@@ -152,7 +190,11 @@ $(document).ready( function() {
 		    slide: function( event, ui ) {
 		    	eq_custom_tr2[4] = ui.value;
 		    }
-    	});
+    	}).slider("pips", {
+  			 first: false,
+  			 last: false,
+  			 step: "17"
+  	    });
   	});
 	
 	//GAIN pot track 1,2		    
@@ -204,8 +246,12 @@ $(document).ready( function() {
     				wavesurfer_tr1.setVolume((100 - ui.value)/100);
     			}
     		}
-    	});
-  	} );
+    	}).slider("pips", {
+  			 first: false,
+  			 last: false,
+  			 step: "10"
+  	    });
+  	});
   
   	$('#slider-vertical_volume1').slider({
   			animate: true,
@@ -223,6 +269,10 @@ $(document).ready( function() {
   			 last: false,
   			 step: "10"
   	    });
+  	$('#slider-vertical_volume1').on("slidechange", function( event, ui ) {
+  		if(audio_focus == 1)
+				wavesurfer_tr1.setVolume(ui.value/100);
+  	});
   
 	$( "#slider-vertical_volume2" ).slider({
 			animate: true,
@@ -240,8 +290,11 @@ $(document).ready( function() {
  			last: false,
  			step: "10"
   		});
-  	
-  	
+	$('#slider-vertical_volume2').on("slidechange", function( event, ui ) {
+  		if(audio_focus == 2)
+				wavesurfer_tr2.setVolume(ui.value/100);
+  	});
+	  	
   	$( "#slider-vertical_velocita1" ).slider({
   			animate: true,
   			orientation: "vertical",
@@ -249,15 +302,23 @@ $(document).ready( function() {
 		    max: 50,
 		    value: 0,
 		    slide: function( event, ui ) {
-		      if(ui.value >=0)
-	    	  	wavesurfer_tr1.setPlaybackRate((ui.value/100)+1);
-	    	  else
-	    		wavesurfer_tr1.setPlaybackRate(ui.value/100);
+		    	if(ui.value >=0){
+		    	  	wavesurfer_tr1.setPlaybackRate((ui.value/100)+1);
+		      }else{
+	    		wavesurfer_tr1.setPlaybackRate(Math.abs(ui.value/100));
+	    		//dag_tr1=Math.abs(ui.value/100);
+		      }
 	      }
   		}).slider("pips", {
   			 rest: "label",
   			 step: "10"
   		});	
+  	$("#slider-vertical_velocita1").on("slidechange", function( event, ui ) {
+  		if(ui.value >=0)
+    	  	wavesurfer_tr1.setPlaybackRate((ui.value/100)+1);
+    	  else
+    		wavesurfer_tr1.setPlaybackRate(Math.abs(ui.value/100));
+  	});
 			  	
   	$( "#slider-vertical_velocita2" ).slider({
 	      animate: true,
@@ -276,6 +337,12 @@ $(document).ready( function() {
   			 rest: "label",
   			 step: "10"
   		});
+  	$("#slider-vertical_velocita2").on("slidechange", function( event, ui ) {
+  		if(ui.value >=0)
+    	  	wavesurfer_tr2.setPlaybackRate((ui.value/100)+1);
+    	  else
+    		wavesurfer_tr2.setPlaybackRate(Math.abs(ui.value/100));
+  	});
   				  				  	
   	function seektimeupdate(wavesurfer,id_elem_rim, durata){ 
   		var currentTime = wavesurfer.getCurrentTime();
@@ -616,7 +683,7 @@ function cue_track2(){
 var deg1 = 0;
 function rotate_my_big_ass_gear1() {
     $('#piastra1').css({
-        'transform': 'rotate(' + (deg1+=1) + 'deg)',
+        'transform': 'rotate(' + (deg1+=dag_tr1) + 'deg)',
     });
 }
 function stop_rotazione(timer){
@@ -659,7 +726,7 @@ function stop_track1(){
 var deg2 = 0;
 function rotate_my_big_ass_gear2() {
     $('#piastra2').css({
-        'transform': 'rotate(' + (deg2+=1) + 'deg)',
+        'transform': 'rotate(' + (deg2+=dag_tr2) + 'deg)',
     });
 }
 var t2;
@@ -696,13 +763,56 @@ function stop_track2(){
 }
 //SYNC button track 1
 function sync_track1(){
-	if(!wavesurfer_tr2.isPlaying()){
-		wavesurfer_tr2.playPause();
+	if(wavesurfer_tr2.isPlaying()){
+		var rate = $("#slider-vertical_velocita2").slider("value");	
+		$("#slider-vertical_velocita1").slider({value:rate});
 	}
 }
 //SYNC button track 2
 function sync_track2(){
-	if(!wavesurfer_tr1.isPlaying()){
-		wavesurfer_tr1.playPause();
+	if(wavesurfer_tr1.isPlaying()){
+		var rate = $("#slider-vertical_velocita1").slider("value");	
+		$("#slider-vertical_velocita2").slider({value:rate});
 	}
 }
+
+//ECHO track1
+var press_in1=0;
+var press_out1=0;
+var curr_in1;
+function button_in1(){
+	if(press_in1==0){
+		press_in1=1;
+		curr_in1=wavesurfer_tr2.getCurrentTime();
+	}
+}
+function button_out1(){
+	if(press_in1==1){
+		press_out1=1;
+		press_in1=0;
+		curr_out1=(wavesurfer_tr2.getCurrentTime())-curr_in1;
+		var i=2;
+		wavesurfer_tr2.skipBackward(curr_out1);		
+	}
+}
+
+//ECHO track2
+var press_in2=0;
+var press_out2=0;
+var curr_in2;
+function button_in2(){
+	if(press_in2==0){
+		press_in2=1;
+		curr_in2=wavesurfer_tr2.getCurrentTime();
+	}
+}
+function button_out2(){
+	if(press_in==1){
+		press_out2=1;
+		press_in2=0;
+		curr_out2=(wavesurfer_tr2.getCurrentTime())-curr_in2;
+		var i=2;
+		wavesurfer_tr2.skipBackward(curr_out2);		
+	}
+}
+

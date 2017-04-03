@@ -70,32 +70,34 @@
 	        </div>
 	      <!-- Riga del blocco della scelta dell'eq -->	
 	      <div class = "row" id="custom_eq_tr1">
-         		<div class="col-md-12 col-sm-12 col-xs-12 custom_eq">
-         			<button class="btn btn-primary btn-eq1" id="button_rock_tr1" onclick="button_eq(id)">
-         				<h2>ROCK</h2>
-         				<img src="assets/images/eq.png" width="20"></img>
-         			</button>
-         			<button class="btn btn-primary btn-eq1" id="button_classica_tr1" onclick="button_eq(id)">
-         				<h2>CLASSICA</h2>
-         				<img src="assets/images/eq.png" width="20"></img>
-         			</button>
-         			<button class="btn btn-primary btn-eq1" id="button_dance_tr1" onclick="button_eq(id)">
-         				<h2>DANCE</h2>
-         				<img src="assets/images/eq.png" width="20"></img>
-         			</button>
-         			<button class="btn btn-primary btn-eq1" id="button_techno_tr1" onclick="button_eq(id)">
-         				<h2>TECHNO</h2>
-         				<img src="assets/images/eq.png" width="20"></img>
-         			</button>
-         			<button class="btn btn-primary btn-eq1" id="button_pop_tr1" onclick="button_eq(id)">
-         				<h2>POP</h2>
-         				<img src="assets/images/eq.png" width="20"></img>
-         			</button>
-         			<button class="btn btn-primary btn-eq1" id="button_custom_tr1" onclick="button_eq(id)">
-         				<h2>CUSTOM</h2>
-         				<img src="assets/images/eq.png" width="20"></img>
-         			</button>
-         		</div>
+         		<div class="btn-group" role="group" aria-label="Basic example">
+	         		<div class="col-md-12 col-sm-12 col-xs-12 custom_eq">
+	         			<button class="btn btn-primary btn-eq1" id="button_rock_tr1" onclick="button_eq(id)">
+	         				<h2>ROCK</h2>
+	         				<img src="assets/images/eq.png" width="20"></img>
+	         			</button>
+	         			<button class="btn btn-primary btn-eq1" id="button_classica_tr1" onclick="button_eq(id)">
+	         				<h2>CLASSICA</h2>
+	         				<img src="assets/images/eq.png" width="20"></img>
+	         			</button>
+	         			<button class="btn btn-primary btn-eq1" id="button_dance_tr1" onclick="button_eq(id)">
+	         				<h2>DANCE</h2>
+	         				<img src="assets/images/eq.png" width="20"></img>
+	         			</button>
+	         			<button class="btn btn-primary btn-eq1" id="button_techno_tr1" onclick="button_eq(id)">
+	         				<h2>TECHNO</h2>
+	         				<img src="assets/images/eq.png" width="20"></img>
+	         			</button>
+	         			<button class="btn btn-primary btn-eq1" id="button_pop_tr1" onclick="button_eq(id)">
+	         				<h2>POP</h2>
+	         				<img src="assets/images/eq.png" width="20"></img>
+	         			</button>
+	         			<button class="btn btn-primary btn-eq1" id="button_custom_tr1" onclick="button_eq(id)">
+	         				<h2>CUSTOM</h2>
+	         				<img src="assets/images/eq.png" width="20"></img>
+	         			</button>
+	         		</div>
+	         	</div>
           </div>
  	  	  <!-- Riga del blocco echo -->
 	 	  <div class = "row" id="echo_traccia1">
@@ -162,11 +164,11 @@
          				<div class="col-md-9 col-sm-9 col-xs-9" id="control_audio1" align="right">
          					<button class="btn btn-primary my-btn" id="button_cue1" onclick="cue_track1()"><h2>CUE</h2></button>
          					<button class="btn btn-primary my-btn" id="button_play1" onclick="playPause_track1()">
-         						<i class="fa fa-play" id="i-play1" aria-hidden="true"></i>
-         						<i class="fa fa-pause" id="i-pause1" aria-hidden="true"></i>	
+         						<i class="glyphicon glyphicon-play" id="i-play1" aria-hidden="true" style="color:#c1c1c1"></i>
+         						<i class="glyphicon glyphicon-pause" id="i-pause1" aria-hidden="true" style="color:#c1c1c1"></i>	
          					</button>
          					<button class="btn btn-primary my-btn" id="button_stop1" onclick="stop_track1()">
-         						<i class="fa fa-stop" aria-hidden="true"></i>
+         						<i class="fa fa-stop" aria-hidden="true" style="color:#c1c1c1"></i>
          					</button>
          					<button class="btn btn-primary my-btn" id="button_sync1" onclick="sync_track1()"><h2>SYNC</h2></button>
          				</div>
@@ -251,11 +253,11 @@
          				<div class="col-md-9 col-sm-9 col-xs-9" align="left" id="control_audio2">
          					<button class="btn btn-primary my-btn" id="button_cue2" onclick="cue_track2()"><h2>CUE</h2></button>
          					<button class="btn btn-primary my-btn" id="button_play2" onclick="playPause_track2()">
-         						<i class="fa fa-play" id="i-play2" aria-hidden="true"></i>
-         						<i class="fa fa-pause" id="i-pause2" aria-hidden="true"></i>
+         						<i class="fa fa-play" id="i-play2" aria-hidden="true" style="color:#c1c1c1"></i>
+         						<i class="fa fa-pause" id="i-pause2" aria-hidden="true" style="color:#c1c1c1"></i>
          					</button>
          					<button class="btn btn-primary my-btn" id="button_stop2" onclick="stop_track2()">
-         						<i class="fa fa-stop" aria-hidden="true"></i>
+         						<i class="fa fa-stop" aria-hidden="true" style="color:#c1c1c1"></i>
          					</button>
          					<button class="btn btn-primary my-btn" id="button_sync2" onclick="sync_track2()"><h2>SYNC</h2></button>
          				</div>
@@ -283,23 +285,23 @@
 			         	<div class="col-md-1 col-sm-1 col-xs-1"></div>
 		         			<div class="col-md-1 col-sm-1 col-xs-1"></div>
 		         		<div class="col-md-2 col-sm-2 col-xs-2">
-			         		<div class=slider-vertical id="H_eq_tr2" style="height:85px;"></div>
+			         		<div class="slider-vertical eq_slider" id="H_eq_tr2" style="height:85px;"></div>
 			         		<label>64</label>
 			         	</div>
 			         	<div class="col-md-2 col-sm-2 col-xs-2">
-		         			<div class=slider-vertical id="HM_eq_tr2" style="height:85px;"></div>
+		         			<div class="slider-vertical eq_slider" id="HM_eq_tr2" style="height:85px;"></div>
 		         			<label>250</label>
 		         		</div>
 		         		<div class="col-md-2 col-sm-2 col-xs-2">
-		         			<div class=slider-vertical id="M_eq_tr2" style="height:85px;"></div>
+		         			<div class="slider-vertical eq_slider" id="M_eq_tr2" style="height:85px;"></div>
 		         			<label>1K</label>
 		         		</div>	
 		         		<div class="col-md-2 col-sm-2 col-xs-2">
-		         			<div class=slider-vertical id="LM_eq_tr2" style="height:85px;"></div>
+		         			<div class="slider-vertical eq_slider" id="LM_eq_tr2" style="height:85px;"></div>
 		         			<label>4K</label>
 		         		</div>	
 		         		<div class="col-md-2 col-sm-2 col-xs-2 ">
-		         			<div class=slider-vertical id="L_eq_tr2" style="height:85px;"></div>
+		         			<div class="slider-vertical eq_slider" id="L_eq_tr2" style="height:85px;"></div>
 		         			<label>16K</label>
 			        	</div>
 			        	<div class="col-md-1 col-sm-1 col-xs-1"></div>
@@ -361,8 +363,8 @@
          			</div>
          			<div class = "row" align="center">
          				<div class="col-md-12 col-sm-12 col-xs-12"></div>
-         					<button class="btn btn-primary my-btn" id="button_in2"><h2>IN</h2></button>
-         					<button class="btn btn-primary my-btn" id="button_out2"><h2>OUT</h2></button>
+         					<button class="btn btn-primary my-btn" id="button_in2" onclick="button_in2()"><h2>IN</h2></button>
+         					<button class="btn btn-primary my-btn" id="button_out2" onclick="button_out2()"><h2>OUT</h2></button>
          			</div>
          		</div>
         	</div>
@@ -371,10 +373,14 @@
       <!-- Macro Area Inferiore -->
       <div class="row" id="m2">
          <div class="col-md-2 col-sm-2 col-xs-2 riga2" id="FileSystem">
-         	<div id="fileSystem" class="file_system"></div>         	
+         	<div id="fileSystem" class="file_system"> 
+         		<div class="force-overflow"></div>        	
+         	</div>
          </div>
          <div class="col-md-2 col-sm-2 col-xs-2 riga2" id="list_music_file">
-			<div id="file_mp3" class="file_mp3"></div>
+			<div id="file_mp3" class="fileMp3">
+				<div class="force-overflow"></div>
+			</div>
          </div>
          <div class="col-md-5 col-sm-5 col-xs-5 riga2" id="playlist_zone">
        		<div class="play_list" id="playlist">
@@ -382,22 +388,22 @@
 					<thead><tr><th>Titolo</th><th>Artista</th><th>Album</th><th>Anno</th><th>Genere</th></tr></thead>
 					<tbody></tbody>							
 				</table>
+				<div class="force-overflow"></div>
 			</div>	
          </div>
          <div class="col-md-3 col-sm-3 col-xs-3 riga2" id="mp3_scheda">
         		<div class="col-md-12 col-sm-12 col-xs-12 riga2">
 					<div id="TabMp3" class="scheda_mp3">
 						<div id="scheda">
-							<table id="tabScheda">
+							<table id="tabScheda">								
 								<tr>
-									<td width="20%">
-										<img src="assets/images/no_cover.png" id="copertina_scheda"></img>
-									</td>
-									<td width="80%">
-										<h1 id="scheda_titolo"></h1>
-										<h2 id="scheda_autore"></h2>
-									</td>
+									<td width="20%" rowspan='2'><img src="assets/images/no_cover.png" id="copertina_scheda"></img></td>
+									<td width="80%"><h1 id="scheda_titolo"></h1></td>
 								</tr>
+								<tr>
+									<td width="80%"><h2 id="scheda_autore"></h2></td>
+								</tr>
+								
 								<tr>
 									<td><h2>Album:</h2></td>
 									<td><h2 id="scheda_album"></h2></td>
