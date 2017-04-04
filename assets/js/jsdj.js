@@ -8,6 +8,9 @@ var init1=0;
 var init2=0;
 var dag_tr1=10;
 var dag_tr2=10;
+var stop1=false;
+var stop2=false;
+var playListURL=[];
 		
 function setTagsScheda(name,tags){
 	var scheda_id = "#scheda_" + name;				
@@ -412,11 +415,15 @@ $(document).ready( function() {
 	       		image.src = src;
         		$( "li" ).each(function( index ) {
 	        		$(this).draggable({
-	        		    revert: "invalid", 
-	        			helper: 'clone',
+	        		    revert: "invalid",
+	        		    helper: "clone",
+	        			helper: function(event){
+	        				return $("<div></div>").append($( '<div><img src="assets/images/disco.png" width="50"</div>' ));
+	        			},
 	        			scroll: false,
 	        			cursor: 'move',
-	        			zIndex: 1,
+	        			cursorAt: { left: 35, top: 25 },
+	        			zIndex: 10,
 	        			start: function(event,ui){
 	        				audioURL = event.target.firstChild.rel;
 	        				var new_dir = event.target.firstChild.rel.replace('./jsdj/','./');
@@ -426,7 +433,8 @@ $(document).ready( function() {
 				        		album = tags.album;
 				        		anno = tags.year;
 				        		track = tags.v2.track;
-				        		genere = tags.v2.genre;				
+				        		genere = tags.v2.genre;	
+				        		src = 'covers/' + autore + '_' + album + '.png';
 	        				});
 		        		}
 	        		});
@@ -436,6 +444,7 @@ $(document).ready( function() {
         		        },
 	        			drop: function(event,ui) {
 							$(this).addClass('ui-state-highlight');
+							playListURL=playListURL.concat([audioURL]);
 							var table = document.getElementById('tabPlayList');
 							var tbody = table.getElementsByTagName('tbody')[0];
 							var tr = document.createElement('tr');
@@ -447,10 +456,28 @@ $(document).ready( function() {
 								tr.appendChild(td);
 							}
 							tbody.appendChild(tr);
+							var c = {};
+							$('#tabPlayList tbody tr').draggable({
+								helper: function(event){
+			        				return $("<div></div>").append($( '<div><img src="assets/images/disco.png" width="50"</div>' ));
+			        			},
+			        			cursor: 'move',
+			        			cursorAt: { left: 35, top: 25 },
+						        start: function(event, ui){
+						        	titolo=this.childNodes[0].textContent;
+						        	autore=this.childNodes[1].textContent;
+						        	album=this.childNodes[2].textContent;
+						        	track=this.childNodes[3].textContent;
+						        	genere=this.childNodes[4].textContent;
+						        	src = 'covers/' + autore + '_' + album + '.png';
+						        	audioURL=playListURL[(event.currentTarget.rowIndex)-1];
+						        }
+							});
 			           	}
 	        		});
 	        		$('#piastra1').droppable({
 	        		    drop: function(event,ui) {
+	        		    	stop_track1();
 	        		    	var url =src.split(' ').join("_");
 	        		    	var urlString = "url(./" + url + ")";
 	        		    	document.getElementById("piastra1").style.backgroundImage = urlString;
@@ -485,6 +512,7 @@ $(document).ready( function() {
 	        		})
 	        		$('#piastra2').droppable({
 	        		    drop: function(event,ui) {
+	        		    	stop_track2();
 	        		    	var url =src.split(' ').join("_");				        		    	
 	        		    	var urlString = "url(./" + url + ")";
 	        		    	document.getElementById("piastra2").style.backgroundImage = urlString;
@@ -560,7 +588,7 @@ $(document).ready( function() {
     	window.windowFile = null;
     	$('#file_mp3').html('<div id="mp3Tree"></div>');
     	initFilesTree(data.rel);
-	});			
+	});		
 });
 
 var eq_custom_tr1 = [50,50,50,50,50];

@@ -1,3 +1,20 @@
+@font-face {
+    font-family: ds-digit;
+    src: url(../Font/DS-DIGIT.TTF);
+}
+@font-face {
+    font-family: Display_St;
+    src: url(../Font/Display_St.ttf);
+}
+@font-face {
+    font-family: earthorbiter;
+    src: url(../Font/earthorbiter.ttf);
+}
+@font-face {
+    font-family: TravelingTypewriter;
+    src: url(../Font/TravelingTypewriter.ttf);
+}
+
 html{
 	padding: 0px;
 	margin: 0px;
@@ -35,6 +52,7 @@ h1 {
 }
 
 #scheda_titolo{
+	font-family: earthorbiter;
 	margin: 0px 0px 0px 10px !important;
 }
 
@@ -44,33 +62,44 @@ h2 {
 	margin: 7px 0px 7px 0px;
 }
 h5 {
-	font-size: 13px;
+	font-family: earthorbiter;
+	font-size: 16px;
 	font-weight: normal;
 	margin-top: 0px !important;
 }
 
 #scheda_autore{
+	font-family: earthorbiter;
 	margin: 0px 0px 10px 10px !important;
 }
 
 #titolo_dettaglio1{
-	margin: 10px 0px 0px 0px !important;
-	height:18px;
+	font-family: Display_St;
+	font-size: 20px;
+	margin: 4px 0px 0px 0px !important;
+	height:20px;
+	overflow: hidden;
 	text-overflow: ellipsis;
 	white-space: nowrap;
 }
 #titolo_dettaglio2{
-	margin: 10px 0px 0px 0px !important;
-	height:18px;
+	font-family: Display_St;
+	font-size: 20px;
+	margin: 4px 0px 0px 0px !important;
+	height:20px;
 	overflow: hidden;
 	text-overflow: ellipsis;
 	white-space: nowrap;
 }
 
 #autore_dettaglio1{
+	font-family: Display_St;
+	font-size: 15px;
 	margin: 0px 0px 0px 0px !important;
 }
 #autore_dettaglio2{
+	font-family: Display_St;
+	font-size: 15px;
 	margin: 0px 0px 0px 0px !important;
 }
 
@@ -82,22 +111,31 @@ h6 {
 }
 
 #min-tot-tr1{
+	font-family: ds-digit;
 	margin-top:15px;
 	margin-left:15px;
-	font-size: 20px !important;
+	font-size: 25px !important;
 }
 #min-tot-tr2{
+	font-family: ds-digit;
 	margin-top:15px;
 	margin-right:15px;
-	font-size: 20px !important;
+	font-size: 25px !important;
 }
 #min-rim-tr1{
-	margin-left:15px;
+	font-family: ds-digit;
+	margin-left:18px;
 }
 #min-rim-tr2{
-	margin-right:15px;
+	font-family: ds-digit;
+	margin-right:18px;
 }
 
+.btn-primary{
+	background-color: #262424 !important;
+	border-color: #c1c1c1 !important;
+	color:#c1c1c1 !important;
+}
 .my-btn{
 	background:#262424 !important;
 	border-color: #c1c1c1 !important;
@@ -120,10 +158,12 @@ i {
 }
 
 #button_cue1,#button_cue2, #button_sync1, #button_sync2{
+	font-family: earthorbiter;
 	width: 48px !important;
 	height: 30px !important;
 }
 #button_flanger1,#button_flanger2, #button_brake1, #button_brake2, #button_echo1, #button_echo2, #button_chorus2{
+	font-family: earthorbiter;
 	width: 48px !important;
 	height: 22px !important;
 }
@@ -137,6 +177,7 @@ i {
 }
 
 #button_in1, #button_out1, #button_in2, #button_out2{
+	font-family: earthorbiter;
 	width: 55px !important;
 	height: 30px !important;
 }
@@ -150,7 +191,7 @@ i {
 }
 
 .btn-eq1,.btn-eq2{
-	font-size: 11px;
+	font-family: earthorbiter;
 	line-height: 14px !important;
 	background:#262424 !important;
 	color:#c1c1c1 !important;
@@ -164,10 +205,10 @@ i {
 	color:#c1c1c1;
 }
 .btn-eq1:focus{
-	border-color: #d60000;
+	border-color: #d60000 !important;
 }
 .btn-eq2:focus{
-	border-color:#20d320;
+	border-color: #20d320 !important;
 }
 .btn-eq1:hover{
 	border-color: #d60000;
@@ -364,6 +405,9 @@ i {
 	transform:rotate(15deg);
 }
 
+.knob{
+	background:#666 !important;
+}
 .knob-surround{
 	margin:0px 0px 0px 0px !important; 
 	width:23px !important;
@@ -371,11 +415,11 @@ i {
 	border: solid 2px #121111 !important;
 	background:#666 !important;
 }
-.knoblable, .knobevalue{
+.knob lable, .knobe value{
 	display:none !important;
 }
 .knob::before{
-	background-color:#666 !important;
+	background-color:#262424 !important;
 }
 .tick::after{
 	background-color:#666 !important;
@@ -384,10 +428,6 @@ i {
 .min{
  	height:80px;
 	padding: 2px 2px 2px 2px;
-}
-
-#rigavolume1{
-	/*border-right: solid 2px #262424;*/
 }
 
 .automix{
@@ -473,6 +513,10 @@ i {
 	background-color:#262424;
 }
 
+.riga2 h2{
+	font-size: 11px !important;
+}
+
 .force-overflow{
 	min-height: 450px;
 }
@@ -509,7 +553,18 @@ i {
 	overflow-y: scroll;
 }
 
+UL.jqueryFileTree{
+	font-family: earthorbiter !important;
+}
+UL.jqueryFileTree LI.directory{
+	background: url(../images/close.png) left top no-repeat !important;
+}
+UL.jqueryFileTree LI.expanded{
+	background: url(../images/open.png) left top no-repeat !important;
+}
+
 .play_list{
+	font-family: earthorbiter;
 	width: 100%;
 	height: 100%;
 	padding:0px !important;
@@ -517,6 +572,7 @@ i {
 }
 
 .scheda_mp3{
+	font-family: earthorbiter;
 	width: 100%;
 	height: 100%;
 }
@@ -538,7 +594,8 @@ table{
 	text-align: center; 
    	border:1px solid #404040;
    	padding:1px;
-	font-size: 10px;
+	font-size: 9px;
+	height: 30px;
 }
 
 #tabPlayList tr:hover { 
@@ -550,7 +607,6 @@ table{
 #copertina_scheda{
 	width: 70px;  
 	height: 70px;
-	border: 1px solid #fff
 }
 
 [class*="col-"] {
